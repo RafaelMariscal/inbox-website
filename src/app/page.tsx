@@ -4,6 +4,7 @@ import Hero from '@/components/Hero'
 import MainAdvantages from '@/components/MainAdvantages'
 import MainPillars from '@/components/MainPillars'
 import MainServices from '@/components/MainServices'
+import Testemonials from '@/components/Testemonials'
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <GetQuote />
         <AboutUs />
         <MainPillars />
+        <Testemonials />
       </div>
     </main>
   )
