@@ -3,6 +3,7 @@ import { Roboto_Slab } from 'next/font/google'
 import type { Metadata } from 'next'
 import { twMerge } from 'tailwind-merge'
 import './globals.css'
+import Footer from '@/components/Footer'
 
 const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 
@@ -39,7 +40,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={twMerge(robotoSlab.className)}>{children}</body>
+      <body className={twMerge(robotoSlab.className)}>
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }
