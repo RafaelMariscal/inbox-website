@@ -16,7 +16,7 @@ export default function FooterSectionLink({
     <Link
       {...rest}
       className="
-        flex w-fit flex-col gap-2 text-sm font-light tracking-wide
+        flex w-fit flex-col gap-2 text-sm font-normal tracking-wide
         text-light  outline-none
         hover:text-send-500 focus:text-send-500
         [&_p]:hover:text-light [&_p]:focus:text-light 

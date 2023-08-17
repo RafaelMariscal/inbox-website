@@ -7,13 +7,13 @@ export default function Footer() {
   return (
     <footer className="w-full bg-eden-900 px-4 pb-3 pt-10">
       <div className="mx-auto flex w-full max-w-screen-xl items-start justify-around">
-        <Link href={'/'} target="_blank">
+        <Link href={'/'} target="_blank" className="outline-none">
           <Image
             src={LogoSrc}
             alt=""
             height={120}
             quality={100}
-            className="outline-none drop-shadow-custom"
+            className="drop-shadow-custom"
           />
         </Link>
         <FooterSection.Root>
