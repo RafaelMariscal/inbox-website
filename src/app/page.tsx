@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero'
+import MainAdvantages from '@/components/MainAdvantages'
 import MainServices from '@/components/MainServices'
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <div className="bg-radial-green">
         <MainServices />
+        <MainAdvantages />
       </div>
     </main>
   )
