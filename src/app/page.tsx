@@ -2,6 +2,7 @@ import AboutUs from '@/components/AboutUs'
 import GetQuote from '@/components/GetQuote'
 import Hero from '@/components/Hero'
 import MainAdvantages from '@/components/MainAdvantages'
+import MainPillars from '@/components/MainPillars'
 import MainServices from '@/components/MainServices'
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <MainAdvantages />
         <GetQuote />
         <AboutUs />
+        <MainPillars />
       </div>
     </main>
   )
