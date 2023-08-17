@@ -9,7 +9,8 @@ export default function CardTitle({ children }: CardTitleProps) {
     <h3
       className="
         relative top-[33%] mx-4 my-6 w-[calc(100%-2rem)]
-        text-center text-3xl font-semibold leading-none drop-shadow-sm
+        text-center text-3xl font-semibold leading-none 
+        drop-shadow-[0_.125rem_.25rem_rgba(0,0,0,0.8)]
         transition-all duration-300
       
         after:absolute after:-bottom-4 after:left-0 

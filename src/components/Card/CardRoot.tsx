@@ -11,6 +11,7 @@ export default function CardRoot({ children }: CardRootProps) {
       className="
         relative block cursor-default select-none overflow-hidden shadow-card
         outline-none
+        
         [&_>div]:hover:bg-eden-950/80 [&_>div]:focus:bg-eden-950/80
       
         [&_h3]:hover:left-0 [&_h3]:hover:top-0 [&_h3]:hover:w-[8.5rem]
