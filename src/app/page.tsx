@@ -1,5 +1,6 @@
 import AboutUs from '@/components/AboutUs'
 import GetQuote from '@/components/GetQuote'
+import GetQuoteForm from '@/components/GetQuoteForm'
 import Hero from '@/components/Hero'
 import MainAdvantages from '@/components/MainAdvantages'
 import MainPillars from '@/components/MainPillars'
@@ -18,6 +19,7 @@ export default function Home() {
         <AboutUs />
         <MainPillars />
         <Testemonials />
+        <GetQuoteForm />
       </div>
     </main>
   )
