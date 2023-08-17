@@ -2,13 +2,12 @@ import KitchenSrc from '@/assets/images/mainServices/kitchen.jpg'
 import VanSrc from '@/assets/images/mainServices/van.jpg'
 import CateringSrc from '@/assets/images/mainServices/catering.jpg'
 import { Card } from './Card'
+import SectionTitle from './SectionTitle'
 
 export default function MainServices() {
   return (
     <section id="services" className="mx-auto mb-14 max-w-screen-lg pt-9">
-      <h2 className="mb-6 text-center text-4xl font-bold leading-none drop-shadow-custom-text">
-        Nossos Serviços
-      </h2>
+      <SectionTitle useTextDecoration>Nossos Serviços</SectionTitle>
 
       <div className="flex gap-10">
         <Card.Root>

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import LogoSrc from '@/assets/logo/logo.svg'
+import SectionTitle from './SectionTitle'
 
 export default function AboutUs() {
   return (
@@ -12,7 +13,10 @@ export default function AboutUs() {
           flex max-w-screen-phones flex-col gap-4 font-bold drop-shadow-custom-text
         "
       >
-        <h2 className="mb-2 text-4xl font-bold leading-none">Quem somos:</h2>
+        <SectionTitle className="mb-0 text-start text-5xl drop-shadow-none">
+          Quem somos:
+        </SectionTitle>
+
         <p>
           Nós da Inbox Alimentação & Serviços fomos projetados para{' '}
           <strong className="font-bold underline underline-offset-2">

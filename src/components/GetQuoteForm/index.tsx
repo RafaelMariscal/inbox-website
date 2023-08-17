@@ -1,10 +1,11 @@
-import { Info } from 'lucide-react'
-import { twMerge } from 'tailwind-merge'
+import SectionTitle from '../SectionTitle'
 import Input from './Input'
 
 export default function GetQuoteForm() {
   return (
-    <section id="quoteForm" className="mx-auto mb-14 max-w-screen-lg pt-9">
+    <section id="quoteForm" className="mx-auto mb-14 max-w-screen-lg pt-12">
+      <SectionTitle useTextDecoration>Solicitar Orçamento</SectionTitle>
+
       <Input.Root className="z-10 mt-4">
         <Input.Input required />
         <Input.Container>

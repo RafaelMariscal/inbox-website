@@ -12,14 +12,14 @@ import {
   PiggyBank,
   Laugh,
 } from 'lucide-react'
+import SectionTitle from '../SectionTitle'
 
 export default function MainAdvantages() {
   return (
     <section id="advantages" className="mx-auto mb-12 max-w-screen-lg pt-9">
-      <h2 className="mb-7 text-center text-4xl font-bold leading-none drop-shadow-custom-text">
-        Quais as <strong className="font-bold">Vantagens</strong> ao
-        Terceirizar?
-      </h2>
+      <SectionTitle className="mb-8">
+        <strong className="font-bold">Vantagens</strong> ao Terceirizar
+      </SectionTitle>
 
       <div className="mb-6 flex items-center justify-center gap-16">
         <Image

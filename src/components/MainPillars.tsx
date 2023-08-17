@@ -2,13 +2,12 @@ import { Card } from './Card'
 import TraditionSrc from '@/assets/images/mainPillars/tradition.jpg'
 import QualitySrc from '@/assets/images/mainPillars/quality.jpg'
 import SoliditySrc from '@/assets/images/mainPillars/solidity.jpg'
+import SectionTitle from './SectionTitle'
 
 export default function MainPillars() {
   return (
     <section id="pillars" className="mx-auto mb-14 max-w-screen-lg pt-9">
-      <h2 className="mb-6 text-center text-4xl font-bold leading-none drop-shadow-custom-text">
-        Nossos Pilares
-      </h2>
+      <SectionTitle useTextDecoration>Nossos Pilares</SectionTitle>
 
       <div className="flex gap-10">
         <Card.Root>
