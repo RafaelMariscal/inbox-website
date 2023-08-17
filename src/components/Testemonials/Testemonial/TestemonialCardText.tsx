@@ -3,7 +3,11 @@ import { Bree_Serif } from 'next/font/google'
 import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-const breeSerif = Bree_Serif({ weight: '400', subsets: ['latin'] })
+const breeSerif = Bree_Serif({
+  weight: '400',
+  subsets: ['latin'],
+  fallback: ['bree-serif', 'serif'],
+})
 
 interface TestemonialCardTextProps {
   children: ReactNode

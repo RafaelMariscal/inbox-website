@@ -5,7 +5,11 @@ import Button from './Button'
 import Brand from '@/assets/logo/Brand'
 import WhatsappLogo from '@/assets/icons/WhatsappLogo'
 
-const breeSerif = Bree_Serif({ weight: '400', subsets: ['latin'] })
+const breeSerif = Bree_Serif({
+  weight: '400',
+  subsets: ['latin'],
+  fallback: ['bree-serif', 'serif'],
+})
 
 export default function Hero() {
   return (
