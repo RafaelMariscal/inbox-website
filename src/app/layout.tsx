@@ -1,3 +1,4 @@
+// eslint-disable-next-line camelcase
 import { Roboto_Slab } from 'next/font/google'
 import type { Metadata } from 'next'
 import { twMerge } from 'tailwind-merge'
