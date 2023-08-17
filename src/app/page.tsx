@@ -1,3 +1,5 @@
+import AboutUs from '@/components/AboutUs'
+import GetQuote from '@/components/GetQuote'
 import Hero from '@/components/Hero'
 import MainAdvantages from '@/components/MainAdvantages'
 import MainServices from '@/components/MainServices'
@@ -10,6 +12,8 @@ export default function Home() {
       <div className="bg-radial-green">
         <MainServices />
         <MainAdvantages />
+        <GetQuote />
+        <AboutUs />
       </div>
     </main>
   )
