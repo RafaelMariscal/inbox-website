@@ -1,28 +1,24 @@
+import WhatsappLogo from '@/assets/icons/WhatsappLogo'
+import Button from '../Button'
 import SectionTitle from '../SectionTitle'
-import Input from './Input'
+import Form from './Form'
 
 export default function GetQuoteForm() {
   return (
     <section id="quoteForm" className="mx-auto mb-14 max-w-screen-lg pt-12">
-      <SectionTitle useTextDecoration>Solicitar Orçamento</SectionTitle>
-
-      <Input.Root className="z-10 mt-4">
-        <Input.Input required />
-        <Input.Container>
-          <Input.Label>Label Test</Input.Label>
-          <Input.ErrorMessage>Exemple of error message</Input.ErrorMessage>
-        </Input.Container>
-      </Input.Root>
-
-      <Input.Root className="z-10 mb-4 mt-4">
-        <Input.Input required />
-        <Input.Container>
-          <Input.Label>Label Test</Input.Label>
-          <Input.ErrorMessage>Exemple of error message</Input.ErrorMessage>
-        </Input.Container>
-      </Input.Root>
-
-      <Input.Select />
+      <SectionTitle useTextDecoration className="mb-8">
+        Solicitar Orçamento
+      </SectionTitle>
+      <div className="mb-6 flex items-center justify-center gap-4">
+        <p className="font-medium">
+          Fale diretamente com um de nossos atendentes:
+        </p>
+        <Button variant="stroke" href="">
+          Whatsapp
+          <WhatsappLogo className="[&_*]:fill-eden-100" />
+        </Button>
+      </div>
+      <Form />
     </section>
   )
 }

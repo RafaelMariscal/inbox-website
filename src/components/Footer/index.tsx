@@ -13,7 +13,7 @@ export default function Footer() {
             alt=""
             height={120}
             quality={100}
-            className="drop-shadow-custom"
+            className="drop-shadow-custom-img"
           />
         </Link>
         <FooterSection.Root>
@@ -76,7 +76,8 @@ export default function Footer() {
       <p
         className="
           mt-9 text-center text-xs font-light tracking-wide 
-          text-light drop-shadow-custom-text
+          text-light drop-shadow-[0_.125rem_.25rem_rgba(0,0,0,0.8)]
+
         "
       >
         Inbox Alimentação e Serviços | 2018 © Todos os direitos reservados.

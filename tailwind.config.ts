@@ -98,21 +98,18 @@ const config: Config = {
         tablets: '820px',
         'tablets-lg': '976px',
       },
-      animation: {
-        showCard: 'showCard 500ms ease',
-        hideCard: 'hideCard 500ms ease',
-        slideRight: 'slideRight 500ms ease',
-        slideLeft: 'slideLeft 500ms ease',
-      },
       keyframes: {
         stretch: {
           '0%': { width: '0%' },
           '100%': { width: '100%' },
         },
-        showUp: {
-          '0%': { opacity: '0%', transform: 'translate(-150%)' },
-          '60%': { opacity: '30%' },
-          '100%': { opacity: '100%', transform: 'translate(0%)' },
+        show: {
+          '0%': { opacity: '0%' },
+          '100%': { opacity: '100%' },
+        },
+        hide: {
+          '0%': { opacity: '100%' },
+          '100%': { opacity: '0%' },
         },
       },
     },
