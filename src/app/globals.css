@@ -8,9 +8,6 @@
     text-rendering: optimizeLegibility;
     color: theme(colors.eden.700);
   }
-  html {
-    scroll-behavior: smooth;
-  }
   /* Custom styles for scrollbar */
   ::-webkit-scrollbar {
     width: 0.25rem;
@@ -29,23 +26,5 @@
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-
-  @keyframes select-content-show {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes select-content-hide {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
   }
 }
