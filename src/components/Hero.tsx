@@ -1,9 +1,9 @@
 // eslint-disable-next-line camelcase
 import { Bree_Serif } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
-import Button from './Button'
 import Brand from '@/assets/logo/Brand'
 import WhatsappLogo from '@/assets/icons/WhatsappLogo'
+import CustomLink from './CustomLink'
 
 const breeSerif = Bree_Serif({
   weight: '400',
@@ -28,13 +28,13 @@ export default function Hero() {
       </h2>
 
       <div className="flex w-full max-w-screen-phones-sm flex-col gap-6">
-        <Button variant="light" href="#quoteForm" scroll className="w-full">
+        <CustomLink variant="light" href="#quoteForm" scroll className="w-full">
           Solicitar Orçamento
-        </Button>
-        <Button variant="stroke" href="" className="w-full">
+        </CustomLink>
+        <CustomLink variant="stroke" href="" className="w-full">
           Whatsapp
           <WhatsappLogo className="[&_*]:fill-eden-100" />
-        </Button>
+        </CustomLink>
       </div>
     </section>
   )

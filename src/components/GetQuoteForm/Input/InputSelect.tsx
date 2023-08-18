@@ -47,7 +47,7 @@ export default function InputSelect({ options, className }: InputSelectProps) {
             <Select.Item
               key={option}
               value={option}
-              className="flex cursor-pointer items-center  justify-center gap-3 px-8 outline-none focus:bg-eden-100"
+              className="flex cursor-pointer items-center justify-center gap-3 px-8 outline-none focus:bg-eden-100"
             >
               <div className="py-1 font-semibold">
                 <Select.ItemText>{option}</Select.ItemText>

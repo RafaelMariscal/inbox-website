@@ -1,4 +1,4 @@
-import Button from './Button'
+import CustomLink from './CustomLink'
 
 export default function GetQuote() {
   return (
@@ -11,9 +11,9 @@ export default function GetQuote() {
           Nossa equipe está à disposição para retirar qualquer dúvida.
         </p>
       </div>
-      <Button href="#quoteForm" scroll variant="light">
+      <CustomLink href="#quoteForm" scroll variant="light">
         Solicitar Orçamento
-      </Button>
+      </CustomLink>
     </div>
   )
 }

@@ -1,20 +1,23 @@
 'use client'
 
-import { ComponentProps } from 'react'
+import Link, { LinkProps } from 'next/link'
+import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-type ButtonRootProps = ComponentProps<'button'> & {
+type ButtonRootProps = LinkProps & {
   variant: 'light' | 'eden' | 'stroke'
+  children: ReactNode
+  className?: string
 }
 
-export default function Button({
+export default function CustomLink({
   variant,
   children,
   className,
   ...rest
 }: ButtonRootProps) {
   return (
-    <button
+    <Link
       {...rest}
       className={twMerge(
         'relative inline-block h-9 bg-salen-500 shadow-button outline-none',
@@ -44,10 +47,11 @@ export default function Button({
           'data-[variant=light]:bg-eden-100 data-[variant=light]:text-eden-700',
           'data-[variant=stroke]:bg-eden-700 data-[variant=stroke]:text-eden-100',
           'data-[variant=stroke]:border data-[variant=stroke]:border-eden-100',
+          className,
         )}
       >
         {children}
       </div>
-    </button>
+    </Link>
   )
 }
