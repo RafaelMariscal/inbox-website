@@ -8,7 +8,8 @@ import MealRequest from './MealsRequest'
 import MEALS from '@/mocks/mealsMock'
 import CustomLink from '../CustomLink'
 import Button from '../Button'
-import { Send } from 'lucide-react'
+import { Send, Soup } from 'lucide-react'
+import MealRequestDialog from './MealRequestDialog'
 
 export default function GetQuoteForm() {
   const errorMessage = 'random error message.'
@@ -129,12 +130,20 @@ export default function GetQuoteForm() {
                       {meal.mealDescription}
                     </MealRequest.RowContentCell>
                   </MealRequest.RowContent>
-                  <MealRequest.RowEditButton />
+                  <MealRequest.RowEditButton mealSelected={meal} />
                 </MealRequest.TableRow>
               ))}
             </MealRequest.Table>
           )}
-          <MealRequest.AddButton>Adicionar Refeição</MealRequest.AddButton>
+          <MealRequestDialog
+            customClassName={{
+              before: 'left-1/2 mt-4 -translate-x-1/2',
+              className: 'h-9 px-4',
+            }}
+          >
+            Adicionar Refeição
+            <Soup size={16} strokeWidth={2} fillOpacity={0} />
+          </MealRequestDialog>
         </MealRequest.Root>
 
         <Button type="submit" variant="stroke" className="w-full">

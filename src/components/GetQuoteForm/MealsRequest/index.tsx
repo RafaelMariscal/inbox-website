@@ -1,4 +1,3 @@
-import MealsRequestAddMealButton from './MealsRequestAddMealButton'
 import MealsRequestEmptyState from './MealsRequestEmptyState'
 import MealsRequestRoot from './MealsRequestRoot'
 import MealsRequestTableHeader from './MealsRequestTableHeader'
@@ -13,7 +12,6 @@ import MealsRequestTitle from './MealsRequestTitle'
 const MealRequest = {
   Root: MealsRequestRoot,
   Title: MealsRequestTitle,
-  AddButton: MealsRequestAddMealButton,
   EmptyState: MealsRequestEmptyState,
   Table: MealsRequestTableRoot,
   TableHeader: MealsRequestTableHeader,

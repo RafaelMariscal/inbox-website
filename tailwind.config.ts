@@ -116,6 +116,21 @@ const config: Config = {
           '0%': { opacity: '100%' },
           '100%': { opacity: '0%' },
         },
+        'dialog-content-show': {
+          '0%': { opacity: '0%', scale: '75%' },
+          '100%': { opacity: '100%', scale: '100%' },
+        },
+        'dialog-content-hide': {
+          '0%': {
+            opacity: '100%',
+            scale: '100%',
+          },
+          '100%': {
+            opacity: '0%',
+            scale: '65%',
+            transform: 'translate(0%,-100%)',
+          },
+        },
       },
     },
   },

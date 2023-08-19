@@ -53,8 +53,8 @@ export default function InputSelect({ options, className }: InputSelectProps) {
                 "
               >
                 <div
-                  data-isFirstOne={i === 0}
-                  className="py-1 font-semibold data-[isFirstOne=true]:opacity-50"
+                  data-isfirst={i === 0}
+                  className="py-1 font-semibold data-[isfirst=true]:opacity-50"
                 >
                   <Select.ItemText>{option}</Select.ItemText>
                 </div>
