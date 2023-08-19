@@ -15,7 +15,8 @@ export default function MealsRequestAddMealButton({
       variant="stroke"
       className="left-1/2 mt-4 -translate-x-1/2"
     >
-      <Soup size={16} strokeWidth={2} /> Adicionar Refeição
+      Adicionar Refeição
+      <Soup size={16} strokeWidth={2} fillOpacity={0} />
     </Button>
   )
 }

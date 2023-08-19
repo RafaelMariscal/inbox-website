@@ -8,8 +8,10 @@ import MealRequest from './MealsRequest'
 import MEALS from '@/mocks/mealsMock'
 import CustomLink from '../CustomLink'
 import Button from '../Button'
+import { Send } from 'lucide-react'
 
 export default function GetQuoteForm() {
+  const errorMessage = 'random error message.'
   return (
     <section id="quoteForm" className="mx-auto mb-14 max-w-screen-lg pt-12">
       <SectionTitle useTextDecoration className="mb-8">
@@ -32,49 +34,49 @@ export default function GetQuoteForm() {
             <Input.Container>
               <Input.Label>Nome</Input.Label>
             </Input.Container>
-            <Input.ErrorMessage errorMessage="Exemple of error message" />
+            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
           </Input.Root>
           <Input.Root>
             <Input.Input required />
             <Input.Container>
               <Input.Label>Cargo</Input.Label>
             </Input.Container>
-            <Input.ErrorMessage errorMessage="Exemple of error message" />
+            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
           </Input.Root>
           <Input.Root>
             <Input.Input required />
             <Input.Container>
               <Input.Label>Email</Input.Label>
             </Input.Container>
-            <Input.ErrorMessage errorMessage="Exemple of error message" />
+            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
           </Input.Root>
           <Input.Root>
             <Input.Input required />
             <Input.Container>
               <Input.Label>Telefone</Input.Label>
             </Input.Container>
-            <Input.ErrorMessage errorMessage="Exemple of error message" />
+            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
           </Input.Root>
           <Input.Root>
             <Input.Input required />
             <Input.Container>
               <Input.Label>Nome da Empresa</Input.Label>
             </Input.Container>
-            <Input.ErrorMessage errorMessage="Exemple of error message" />
+            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
           </Input.Root>
           <Input.Root>
             <Input.Input required />
             <Input.Container>
               <Input.Label>CNPJ</Input.Label>
             </Input.Container>
-            <Input.ErrorMessage errorMessage="Exemple of error message" />
+            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
           </Input.Root>
           <Input.Root>
             <Input.Input required />
             <Input.Container>
               <Input.Label>Endereço</Input.Label>
             </Input.Container>
-            <Input.ErrorMessage errorMessage="Exemple of error message" />
+            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
           </Input.Root>
           <Input.Select options={SERVICES} />
         </div>
@@ -135,8 +137,9 @@ export default function GetQuoteForm() {
           <MealRequest.AddButton>Adicionar Refeição</MealRequest.AddButton>
         </MealRequest.Root>
 
-        <Button type="submit" variant="light" className="w-full">
+        <Button type="submit" variant="stroke" className="w-full">
           Enviar Solicitação de Orçamento
+          <Send size={16} strokeWidth={2.5} fillOpacity={0} />
         </Button>
       </form>
     </section>

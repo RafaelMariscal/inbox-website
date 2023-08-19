@@ -2,7 +2,7 @@
 
 import * as Select from '@radix-ui/react-select'
 import { Check, ChevronDownIcon } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 interface InputSelectProps {
@@ -32,33 +32,42 @@ export default function InputSelect({ options, className }: InputSelectProps) {
           <ChevronDownIcon />
         </Select.Icon>
       </Select.Trigger>
-
-      <Select.Content
-        sideOffset={4}
-        position="popper"
-        align="end"
-        className={twMerge(
-          'w-full bg-light shadow-lg shadow-dark/20',
-          'data-[state=open]:animate-[select-content-show_300ms_forwards]',
-        )}
-      >
-        <Select.Viewport>
-          {options.map((option) => (
-            <Select.Item
-              key={option}
-              value={option}
-              className="flex cursor-pointer items-center justify-center gap-3 px-8 outline-none focus:bg-eden-100"
-            >
-              <div className="py-1 font-semibold">
-                <Select.ItemText>{option}</Select.ItemText>
-              </div>
-              <Select.ItemIndicator className="absolute right-2">
-                <Check size={14} strokeWidth={2.5} />
-              </Select.ItemIndicator>
-            </Select.Item>
-          ))}
-        </Select.Viewport>
-      </Select.Content>
+      <Select.Portal className="z-50">
+        <Select.Content
+          sideOffset={4}
+          position="popper"
+          align="end"
+          className={twMerge(
+            'w-full bg-light shadow-lg shadow-dark/20',
+            'data-[state=open]:animate-[show_300ms_forwards]',
+          )}
+        >
+          <Select.Viewport>
+            {options.map((option, i) => (
+              <Select.Item
+                key={option}
+                value={option}
+                className="
+                  flex cursor-pointer items-center justify-center gap-3 px-8 
+                  outline-none focus:bg-eden-100 data-[isFirstOne=true]:opacity-20
+                "
+              >
+                <div
+                  data-isFirstOne={i === 0}
+                  className="py-1 font-semibold data-[isFirstOne=true]:opacity-50"
+                >
+                  <Select.ItemText>{option}</Select.ItemText>
+                </div>
+                {i !== 0 && (
+                  <Select.ItemIndicator className="absolute right-2">
+                    <Check size={14} strokeWidth={2.5} />
+                  </Select.ItemIndicator>
+                )}
+              </Select.Item>
+            ))}
+          </Select.Viewport>
+        </Select.Content>
+      </Select.Portal>
     </Select.Root>
   )
 }

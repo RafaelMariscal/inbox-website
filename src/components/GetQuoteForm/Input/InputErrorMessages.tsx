@@ -14,15 +14,20 @@ export default function InputErrorMessages({
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <HoverCard.Root open={isOpen} onOpenChange={setIsOpen} openDelay={300}>
-      <HoverCard.Trigger className="absolute right-2 top-1 z-50 cursor-default">
-        <Info
-          size={12}
-          strokeWidth={2}
-          fill="#fdc5b3"
-          fillOpacity="20%"
-          stroke="#de3700"
-        />
+    <HoverCard.Root open={isOpen} onOpenChange={setIsOpen} openDelay={100}>
+      <HoverCard.Trigger asChild>
+        <button
+          type="button"
+          className="absolute right-2 top-1 z-50 cursor-default outline-none"
+        >
+          <Info
+            size={12}
+            strokeWidth={2}
+            fill="#fdc5b3"
+            fillOpacity="20%"
+            stroke="#de3700"
+          />
+        </button>
       </HoverCard.Trigger>
       <AnimatePresence>
         {isOpen && (
