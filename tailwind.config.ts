@@ -117,8 +117,16 @@ const config: Config = {
           '100%': { opacity: '0%' },
         },
         'dialog-content-show': {
-          '0%': { opacity: '0%', scale: '75%' },
-          '100%': { opacity: '100%', scale: '100%' },
+          '0%': {
+            opacity: '0%',
+            scale: '75%',
+            transform: 'translate(0%,-50%)',
+          },
+          '100%': {
+            opacity: '100%',
+            scale: '100%',
+            transform: 'translate(0%,0%)',
+          },
         },
         'dialog-content-hide': {
           '0%': {
@@ -127,8 +135,8 @@ const config: Config = {
           },
           '100%': {
             opacity: '0%',
-            scale: '65%',
-            transform: 'translate(0%,-100%)',
+            scale: '25%',
+            transform: 'translate(0%,50%)',
           },
         },
       },

@@ -7,10 +7,15 @@ import { twMerge } from 'tailwind-merge'
 
 interface InputSelectProps {
   options: string[]
+  placeholder: string
   className?: string
 }
 
-export default function InputSelect({ options, className }: InputSelectProps) {
+export default function InputSelect({
+  options,
+  placeholder,
+  className,
+}: InputSelectProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -18,7 +23,7 @@ export default function InputSelect({ options, className }: InputSelectProps) {
       <Select.Trigger
         className={twMerge(
           'relative h-14 w-full border border-eden-100',
-          'flex items-center justify-between gap-4 pr-4 font-semibold',
+          'flex items-center justify-between pr-4 font-semibold',
           'shadow-lg shadow-dark/20 outline-none',
           'hover:bg-eden-100/30 focus:bg-eden-100/30',
           className,
@@ -26,7 +31,7 @@ export default function InputSelect({ options, className }: InputSelectProps) {
         aria-label="Services"
       >
         <div className="flex-1 text-center">
-          <Select.Value placeholder="Modal de Serviço" />
+          <Select.Value placeholder={placeholder} />
         </div>
         <Select.Icon>
           <ChevronDownIcon />
@@ -56,7 +61,9 @@ export default function InputSelect({ options, className }: InputSelectProps) {
                   data-isfirst={i === 0}
                   className="py-1 font-semibold data-[isfirst=true]:opacity-50"
                 >
-                  <Select.ItemText>{option}</Select.ItemText>
+                  <Select.ItemText>
+                    {option === '' ? placeholder : option}
+                  </Select.ItemText>
                 </div>
                 {i !== 0 && (
                   <Select.ItemIndicator className="absolute right-2">

@@ -12,7 +12,8 @@ import { Send, Soup } from 'lucide-react'
 import MealRequestDialog from './MealRequestDialog'
 
 export default function GetQuoteForm() {
-  const errorMessage = 'random error message.'
+  const errorMessage = undefined
+  const errorMessage1 = 'random error message.'
   return (
     <section id="quoteForm" className="mx-auto mb-14 max-w-screen-lg pt-12">
       <SectionTitle useTextDecoration className="mb-8">
@@ -20,7 +21,7 @@ export default function GetQuoteForm() {
       </SectionTitle>
       <div className="mb-6 flex items-center justify-center gap-4">
         <p className="font-medium">
-          Fale diretamente com um de nossos atendentes:
+          Ou fale diretamente com um de nossos atendentes:
         </p>
         <CustomLink variant="stroke" href="">
           Whatsapp
@@ -35,7 +36,9 @@ export default function GetQuoteForm() {
             <Input.Container>
               <Input.Label>Nome</Input.Label>
             </Input.Container>
-            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
+            {errorMessage1 && (
+              <Input.ErrorMessage errorMessage={errorMessage1} />
+            )}
           </Input.Root>
           <Input.Root>
             <Input.Input required />
@@ -79,7 +82,7 @@ export default function GetQuoteForm() {
             </Input.Container>
             {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
           </Input.Root>
-          <Input.Select options={SERVICES} />
+          <Input.Select placeholder="Modal de Serviço" options={SERVICES} />
         </div>
 
         <MealRequest.Root className="mb-6">

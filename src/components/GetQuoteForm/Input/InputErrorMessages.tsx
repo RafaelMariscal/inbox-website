@@ -18,7 +18,7 @@ export default function InputErrorMessages({
       <HoverCard.Trigger asChild>
         <button
           type="button"
-          className="absolute right-2 top-1 z-50 cursor-default outline-none"
+          className="absolute right-2 top-1 z-10 cursor-default outline-none"
         >
           <Info
             size={12}
@@ -37,7 +37,7 @@ export default function InputErrorMessages({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="border border-terracotta-500 bg-light px-3 py-2 text-sm font-medium text-terracotta-500"
+                className="z-50 border border-terracotta-500 bg-light px-3 py-2 text-sm font-medium text-terracotta-500"
               >
                 {errorMessage}
               </motion.div>
