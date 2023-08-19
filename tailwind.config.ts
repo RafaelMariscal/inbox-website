@@ -99,9 +99,14 @@ const config: Config = {
         'tablets-lg': '976px',
       },
       keyframes: {
-        stretch: {
+        'show-divider': {
           '0%': { width: '0%' },
           '100%': { width: '100%' },
+        },
+        'show-text': {
+          '0%': { opacity: '0%', transform: 'translate(-150%)' },
+          '60%': { opacity: '30%' },
+          '100%': { opacity: '100%', transform: 'translate(0%)' },
         },
         show: {
           '0%': { opacity: '0%' },
