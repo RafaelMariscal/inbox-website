@@ -1,9 +1,21 @@
+import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
+import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import { ComponentProps } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-type InputTextProps = ComponentProps<'input'>
+type InputTextProps = ComponentProps<'input'> & {
+  name: keyof QuoteFormData
+}
 
-export default function InputText({ className, ...rest }: InputTextProps) {
+export default function InputText({
+  className,
+  name,
+  ...rest
+}: InputTextProps) {
+  const useFormReturn = useQuoteFormContext()
+  if (useFormReturn === null) return <></>
+  const { useQuoteForm } = useFormReturn
+  const { register } = useQuoteForm
   return (
     <input
       {...rest}
@@ -16,6 +28,7 @@ export default function InputText({ className, ...rest }: InputTextProps) {
         '[&_~*]:valid:z-10 [&_~*]:focus:z-10',
         className,
       )}
+      {...register(name)}
     />
   )
 }

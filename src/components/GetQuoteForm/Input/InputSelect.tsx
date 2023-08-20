@@ -1,25 +1,37 @@
 'use client'
 
+import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
+import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import * as Select from '@radix-ui/react-select'
 import { Check, ChevronDownIcon } from 'lucide-react'
 import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 interface InputSelectProps {
+  name: keyof QuoteFormData
   options: string[]
   placeholder: string
   className?: string
 }
 
 export default function InputSelect({
+  name,
   options,
   placeholder,
   className,
 }: InputSelectProps) {
   const [open, setOpen] = useState(false)
+  const useFormReturn = useQuoteFormContext()
+  if (useFormReturn === null) return <></>
+  const { useQuoteForm } = useFormReturn
+  const { setValue } = useQuoteForm
 
   return (
-    <Select.Root open={open} onOpenChange={setOpen} required>
+    <Select.Root
+      open={open}
+      onOpenChange={setOpen}
+      onValueChange={(value) => setValue(name, value)}
+    >
       <Select.Trigger
         className={twMerge(
           'relative h-14 w-full border border-eden-100',

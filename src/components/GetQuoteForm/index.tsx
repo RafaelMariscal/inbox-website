@@ -8,12 +8,23 @@ import MealRequest from './MealsRequest'
 import MEALS from '@/mocks/mealsMock'
 import CustomLink from '../CustomLink'
 import Button from '../Button'
-import { Send, Soup } from 'lucide-react'
 import MealRequestDialog from './MealRequestDialog'
+import { Send, Soup } from 'lucide-react'
+import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
+import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
 
 export default function GetQuoteForm() {
-  const errorMessage = undefined
-  const errorMessage1 = 'random error message.'
+  const useFormReturn = useQuoteFormContext()
+  if (useFormReturn === null) return <></>
+  const { useQuoteForm } = useFormReturn
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = useQuoteForm
+
+  const quoteFormSubmit = (data: QuoteFormData) => {
+    console.log(data)
+  }
   return (
     <section id="quoteForm" className="mx-auto mb-14 max-w-screen-lg pt-12">
       <SectionTitle useTextDecoration className="mb-8">
@@ -29,60 +40,76 @@ export default function GetQuoteForm() {
         </CustomLink>
       </div>
 
-      <form>
+      <form onSubmit={handleSubmit(quoteFormSubmit)}>
         <div className="grid grid-cols-2 gap-3 gap-x-6">
           <Input.Root>
-            <Input.Input required />
+            <Input.Input name="name" />
             <Input.Container>
               <Input.Label>Nome</Input.Label>
             </Input.Container>
-            {errorMessage1 && (
-              <Input.ErrorMessage errorMessage={errorMessage1} />
+            {errors?.name && (
+              <Input.ErrorMessage errorMessage={errors?.name.message} />
             )}
           </Input.Root>
           <Input.Root>
-            <Input.Input required />
+            <Input.Input name="role" />
             <Input.Container>
               <Input.Label>Cargo</Input.Label>
             </Input.Container>
-            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
+            {errors?.role && (
+              <Input.ErrorMessage errorMessage={errors.role.message} />
+            )}
           </Input.Root>
           <Input.Root>
-            <Input.Input required />
+            <Input.Input name="email" />
             <Input.Container>
               <Input.Label>Email</Input.Label>
             </Input.Container>
-            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
+            {errors?.email && (
+              <Input.ErrorMessage errorMessage={errors.email.message} />
+            )}
           </Input.Root>
           <Input.Root>
-            <Input.Input required />
+            <Input.Input name="phone" />
             <Input.Container>
               <Input.Label>Telefone</Input.Label>
             </Input.Container>
-            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
+            {errors?.phone && (
+              <Input.ErrorMessage errorMessage={errors.phone.message} />
+            )}
           </Input.Root>
           <Input.Root>
-            <Input.Input required />
+            <Input.Input name="companyName" />
             <Input.Container>
               <Input.Label>Nome da Empresa</Input.Label>
             </Input.Container>
-            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
+            {errors?.companyName && (
+              <Input.ErrorMessage errorMessage={errors.companyName.message} />
+            )}
           </Input.Root>
           <Input.Root>
-            <Input.Input required />
+            <Input.Input name="cnpj" />
             <Input.Container>
               <Input.Label>CNPJ</Input.Label>
             </Input.Container>
-            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
+            {errors?.cnpj && (
+              <Input.ErrorMessage errorMessage={errors.cnpj.message} />
+            )}
           </Input.Root>
           <Input.Root>
-            <Input.Input required />
+            <Input.Input name="address" />
             <Input.Container>
               <Input.Label>Endereço</Input.Label>
             </Input.Container>
-            {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
+            {errors?.address && (
+              <Input.ErrorMessage errorMessage={errors.address.message} />
+            )}
           </Input.Root>
-          <Input.Select placeholder="Modal de Serviço" options={SERVICES} />
+          <Input.Select
+            name="serviceModel"
+            placeholder="Modal de Serviço"
+            options={SERVICES}
+          />
         </div>
 
         <MealRequest.Root className="mb-6">
