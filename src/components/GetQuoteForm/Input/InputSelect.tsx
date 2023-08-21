@@ -6,10 +6,12 @@ import * as Select from '@radix-ui/react-select'
 import { Check, ChevronDownIcon } from 'lucide-react'
 import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-
+import { clsx } from 'clsx'
+import Input from '.'
 interface InputSelectProps {
   name: keyof QuoteFormData
   options: string[]
+  errorMessage?: string | undefined
   placeholder: string
   className?: string
 }
@@ -17,6 +19,7 @@ interface InputSelectProps {
 export default function InputSelect({
   name,
   options,
+  errorMessage,
   placeholder,
   className,
 }: InputSelectProps) {
@@ -24,7 +27,9 @@ export default function InputSelect({
   const useFormReturn = useQuoteFormContext()
   if (useFormReturn === null) return <></>
   const { useQuoteForm } = useFormReturn
-  const { setValue } = useQuoteForm
+  const { setValue, watch } = useQuoteForm
+
+  const filedValue = watch(name)
 
   return (
     <Select.Root
@@ -32,23 +37,33 @@ export default function InputSelect({
       onOpenChange={setOpen}
       onValueChange={(value) => setValue(name, value)}
     >
-      <Select.Trigger
-        className={twMerge(
-          'relative h-14 w-full border border-eden-100',
-          'flex items-center justify-between pr-4 font-semibold',
-          'shadow-lg shadow-dark/20 outline-none',
-          'hover:bg-eden-100/30 focus:bg-eden-100/30',
-          className,
-        )}
-        aria-label="Services"
-      >
-        <div className="flex-1 text-center">
-          <Select.Value placeholder={placeholder} />
-        </div>
-        <Select.Icon>
-          <ChevronDownIcon />
-        </Select.Icon>
-      </Select.Trigger>
+      <div className="relative">
+        <Select.Trigger
+          className={twMerge(
+            'relative h-14 w-full border border-eden-100',
+            'flex items-center justify-between pr-4 font-semibold',
+            'shadow-lg shadow-dark/20 outline-none',
+            'hover:bg-eden-100/30 focus:bg-eden-100/30',
+            clsx(errorMessage && 'border-terracotta-500'),
+            className,
+          )}
+          aria-label="Services"
+        >
+          <div
+            className={twMerge(
+              'flex-1 text-center',
+              clsx(filedValue === ' ' && 'opacity-50'),
+            )}
+          >
+            <Select.Value placeholder={placeholder} />
+          </div>
+          <Select.Icon>
+            <ChevronDownIcon />
+          </Select.Icon>
+        </Select.Trigger>
+        {errorMessage && <Input.ErrorMessage errorMessage={errorMessage} />}
+      </div>
+
       <Select.Portal className="z-50">
         <Select.Content
           sideOffset={4}

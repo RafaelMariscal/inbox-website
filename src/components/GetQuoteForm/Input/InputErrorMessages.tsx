@@ -18,7 +18,7 @@ export default function InputErrorMessages({
       <HoverCard.Trigger asChild>
         <button
           type="button"
-          className="absolute right-2 top-1 z-10 cursor-default outline-none"
+          className="absolute right-1 top-[.125rem] z-10 translate-y-[.125rem] cursor-default outline-none"
         >
           <Info
             size={12}

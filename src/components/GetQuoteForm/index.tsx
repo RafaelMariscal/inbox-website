@@ -42,7 +42,7 @@ export default function GetQuoteForm() {
 
       <form onSubmit={handleSubmit(quoteFormSubmit)}>
         <div className="grid grid-cols-2 gap-3 gap-x-6">
-          <Input.Root>
+          <Input.Root errorMessage={errors.name}>
             <Input.Input name="name" />
             <Input.Container>
               <Input.Label>Nome</Input.Label>
@@ -51,7 +51,7 @@ export default function GetQuoteForm() {
               <Input.ErrorMessage errorMessage={errors?.name.message} />
             )}
           </Input.Root>
-          <Input.Root>
+          <Input.Root errorMessage={errors.role}>
             <Input.Input name="role" />
             <Input.Container>
               <Input.Label>Cargo</Input.Label>
@@ -60,7 +60,7 @@ export default function GetQuoteForm() {
               <Input.ErrorMessage errorMessage={errors.role.message} />
             )}
           </Input.Root>
-          <Input.Root>
+          <Input.Root errorMessage={errors.email}>
             <Input.Input name="email" />
             <Input.Container>
               <Input.Label>Email</Input.Label>
@@ -69,7 +69,7 @@ export default function GetQuoteForm() {
               <Input.ErrorMessage errorMessage={errors.email.message} />
             )}
           </Input.Root>
-          <Input.Root>
+          <Input.Root errorMessage={errors.phone}>
             <Input.Input name="phone" />
             <Input.Container>
               <Input.Label>Telefone</Input.Label>
@@ -78,7 +78,7 @@ export default function GetQuoteForm() {
               <Input.ErrorMessage errorMessage={errors.phone.message} />
             )}
           </Input.Root>
-          <Input.Root>
+          <Input.Root errorMessage={errors.companyName}>
             <Input.Input name="companyName" />
             <Input.Container>
               <Input.Label>Nome da Empresa</Input.Label>
@@ -87,7 +87,7 @@ export default function GetQuoteForm() {
               <Input.ErrorMessage errorMessage={errors.companyName.message} />
             )}
           </Input.Root>
-          <Input.Root>
+          <Input.Root errorMessage={errors.cnpj}>
             <Input.Input name="cnpj" />
             <Input.Container>
               <Input.Label>CNPJ</Input.Label>
@@ -96,7 +96,7 @@ export default function GetQuoteForm() {
               <Input.ErrorMessage errorMessage={errors.cnpj.message} />
             )}
           </Input.Root>
-          <Input.Root>
+          <Input.Root errorMessage={errors.address}>
             <Input.Input name="address" />
             <Input.Container>
               <Input.Label>Endereço</Input.Label>
@@ -108,6 +108,7 @@ export default function GetQuoteForm() {
           <Input.Select
             name="serviceModel"
             placeholder="Modal de Serviço"
+            errorMessage={errors?.serviceModel?.message}
             options={SERVICES}
           />
         </div>
