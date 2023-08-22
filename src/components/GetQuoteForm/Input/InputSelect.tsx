@@ -1,7 +1,7 @@
 'use client'
 
 import * as Select from '@radix-ui/react-select'
-import { Check, ChevronDownIcon } from 'lucide-react'
+import { Check, ChevronDown, ChevronDownIcon, ChevronUp } from 'lucide-react'
 import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { clsx } from 'clsx'
@@ -71,7 +71,7 @@ export default function InputSelect<T>({
             'data-[state=open]:animate-[show_300ms_forwards]',
           )}
         >
-          <Select.Viewport className="max-h-52">
+          <Select.Viewport className="max-h-52 ">
             {options.map((option, i) => (
               <Select.Item
                 key={option}
@@ -96,6 +96,12 @@ export default function InputSelect<T>({
                 )}
               </Select.Item>
             ))}
+            <Select.ScrollUpButton className="fixed right-2 top-2">
+              <ChevronUp size={16} className="" />
+            </Select.ScrollUpButton>
+            <Select.ScrollDownButton className="fixed bottom-2 right-2">
+              <ChevronDown size={16} className="" />
+            </Select.ScrollDownButton>
           </Select.Viewport>
         </Select.Content>
       </Select.Portal>
