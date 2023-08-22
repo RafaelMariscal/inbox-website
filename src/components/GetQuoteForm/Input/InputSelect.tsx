@@ -1,41 +1,38 @@
 'use client'
 
-import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
-import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import * as Select from '@radix-ui/react-select'
 import { Check, ChevronDownIcon } from 'lucide-react'
 import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { clsx } from 'clsx'
 import Input from '.'
-interface InputSelectProps {
-  name: keyof QuoteFormData
+import { FieldValues, Path, PathValue, UseFormSetValue } from 'react-hook-form'
+interface InputSelectProps<T extends FieldValues> {
+  name: Path<T>
   options: string[]
-  errorMessage?: string | undefined
+  value: string
+  setValue: UseFormSetValue<T>
   placeholder: string
+  errorMessage?: string | undefined
   className?: string
 }
 
-export default function InputSelect({
+export default function InputSelect<T>({
   name,
   options,
+  value,
+  setValue,
   errorMessage,
   placeholder,
   className,
-}: InputSelectProps) {
+}: InputSelectProps<{ [key in keyof T]: T[key] }>) {
   const [open, setOpen] = useState(false)
-  const useFormReturn = useQuoteFormContext()
-  if (useFormReturn === null) return <></>
-  const { useQuoteForm } = useFormReturn
-  const { setValue, watch } = useQuoteForm
-
-  const filedValue = watch(name)
-
   return (
     <Select.Root
       open={open}
       onOpenChange={setOpen}
-      onValueChange={(value) => setValue(name, value)}
+      value={value}
+      onValueChange={(value) => setValue(name, value as PathValue<T, Path<T>>)}
     >
       <div className="relative">
         <Select.Trigger
@@ -52,7 +49,7 @@ export default function InputSelect({
           <div
             className={twMerge(
               'flex-1 text-center',
-              clsx(filedValue === ' ' && 'opacity-50'),
+              clsx(value === ' ' && 'opacity-50'),
             )}
           >
             <Select.Value placeholder={placeholder} />

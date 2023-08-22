@@ -5,6 +5,8 @@ import { ComponentProps, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Input from '../Input'
 import Button from '@/components/Button'
+import { useMealRequestFormContext } from '@/contexts/MealRequestFormContext/hook'
+import { MealRequestFormData } from '@/contexts/MealRequestFormContext/porvider'
 
 interface CustomClassNameProps {
   before?: string
@@ -24,6 +26,23 @@ export default function MealRequestDialog({
 }: MealRequestDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
   const errorMessage = undefined
+  const ctxReturn = useMealRequestFormContext()
+  if (ctxReturn === null) return <></>
+  const { MealRequestForm } = ctxReturn
+  const {
+    handleSubmit,
+    register,
+    watch,
+    setValue,
+    formState: { errors },
+  } = MealRequestForm
+
+  const mealTypeValue = watch('mealType')
+  const mealTimeValue = watch('mealTime')
+
+  const handleMealRequestDialogSubmit = (data: MealRequestFormData) => {
+    console.log('MealRequestDialogForm Submitted', { data })
+  }
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -92,20 +111,34 @@ export default function MealRequestDialog({
               Complete o formulário para adicionar uma nova refeição à
               solicitação.
             </Dialog.Description>
-            <form className="mt-3">
+            <form
+              className="mt-3"
+              onSubmit={handleSubmit(handleMealRequestDialogSubmit)}
+            >
               <div className="mb-2 grid grid-cols-3 grid-rows-2 gap-2">
-                <Input.Select
+                <Input.Select<MealRequestFormData>
+                  name="mealType"
                   placeholder="Tipo de Refeição"
+                  value={mealTypeValue}
+                  setValue={setValue}
+                  errorMessage={errors?.mealType?.message}
                   options={['', 'test1', 'test2', 'test3']}
                   className="col-span-2"
                 />
                 <Input.Select
+                  name="mealTime"
                   placeholder="Horário"
+                  value={mealTimeValue}
+                  setValue={setValue}
+                  errorMessage={errors?.mealTime?.message}
                   options={['', 'test1', 'test2', 'test3']}
                   className="max-w-[9rem]"
                 />
-                <Input.Root>
-                  <Input.Input required />
+                <Input.Root errorMessage={errors?.weekDaysQuantities}>
+                  <Input.Input<MealRequestFormData>
+                    inputName="weekDaysQuantities"
+                    register={register}
+                  />
                   <Input.Container>
                     <Input.Label>Qtd. seg. à sex.</Input.Label>
                   </Input.Container>
@@ -113,8 +146,11 @@ export default function MealRequestDialog({
                     <Input.ErrorMessage errorMessage={errorMessage} />
                   )}
                 </Input.Root>
-                <Input.Root>
-                  <Input.Input required />
+                <Input.Root errorMessage={errors?.saturdayQuantities}>
+                  <Input.Input<MealRequestFormData>
+                    inputName="saturdayQuantities"
+                    register={register}
+                  />
                   <Input.Container>
                     <Input.Label>Qtd. sábado</Input.Label>
                   </Input.Container>
@@ -122,8 +158,11 @@ export default function MealRequestDialog({
                     <Input.ErrorMessage errorMessage={errorMessage} />
                   )}
                 </Input.Root>
-                <Input.Root>
-                  <Input.Input required />
+                <Input.Root errorMessage={errors?.sundaysQuantities}>
+                  <Input.Input<MealRequestFormData>
+                    inputName="sundaysQuantities"
+                    register={register}
+                  />
                   <Input.Container>
                     <Input.Label>Qtd. domingo</Input.Label>
                   </Input.Container>
@@ -132,10 +171,16 @@ export default function MealRequestDialog({
                   )}
                 </Input.Root>
               </div>
-              <Input.Root className="h-40">
-                <Input.Input required />
+              <Input.Root
+                className="h-40"
+                errorMessage={errors?.mealDescription}
+              >
+                <Input.Input<MealRequestFormData>
+                  inputName="mealDescription"
+                  register={register}
+                />
                 <Input.Container>
-                  <Input.Label>Cargo</Input.Label>
+                  <Input.Label>Composição da refeição</Input.Label>
                 </Input.Container>
                 {errorMessage && (
                   <Input.ErrorMessage errorMessage={errorMessage} />

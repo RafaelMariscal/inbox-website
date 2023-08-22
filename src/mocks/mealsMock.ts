@@ -36,6 +36,18 @@ const MEALS: MealsProps[] = [
     mealDescription:
       'Arroz, Feijão, Macarrão, Farofa, 2 opções de Saladas, 2 opões de proteínas e doce ou fruta.',
   },
+  {
+    id: `${MealsTypes.dinner}1`,
+    type: MealsTypes.dinner,
+    timeToServe: '11:00',
+    quantities: {
+      weekdays: 200,
+      onSaturdays: 160,
+      onSundays: 110,
+    },
+    mealDescription:
+      'Arroz, Feijão, Macarrão, Farofa, 2 opções de Saladas, 2 opões de proteínas e doce ou fruta.',
+  },
 ]
 
 export default MEALS

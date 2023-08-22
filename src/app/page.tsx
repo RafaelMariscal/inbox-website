@@ -6,6 +6,8 @@ import MainAdvantages from '@/components/MainAdvantages'
 import MainPillars from '@/components/MainPillars'
 import MainServices from '@/components/MainServices'
 import Testemonials from '@/components/Testemonials'
+import { GlobalMealRequestFormProvider } from '@/contexts/MealRequestFormContext/porvider'
+import { GlobalQuoteFormProvider } from '@/contexts/QuoteFormContext/porvider'
 
 export default function Home() {
   return (
@@ -19,7 +21,11 @@ export default function Home() {
         <AboutUs />
         <MainPillars />
         <Testemonials />
-        <GetQuoteForm />
+        <GlobalQuoteFormProvider>
+          <GlobalMealRequestFormProvider>
+            <GetQuoteForm />
+          </GlobalMealRequestFormProvider>
+        </GlobalQuoteFormProvider>
       </div>
     </main>
   )

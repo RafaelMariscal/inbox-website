@@ -3,7 +3,6 @@ import Footer from '@/components/Footer'
 // eslint-disable-next-line camelcase
 import { Roboto_Slab } from 'next/font/google'
 import type { Metadata } from 'next'
-import { GlobalQuoteFormProvider } from '@/contexts/QuoteFormContext/porvider'
 
 const robotoSlab = Roboto_Slab({
   subsets: ['latin'],
@@ -44,7 +43,7 @@ export default function RootLayout({
   return (
     <html className="scroll-smooth" lang="pt-BR">
       <body className={robotoSlab.className}>
-        <GlobalQuoteFormProvider>{children}</GlobalQuoteFormProvider>
+        {children}
         <Footer />
       </body>
     </html>

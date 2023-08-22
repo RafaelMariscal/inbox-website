@@ -19,9 +19,8 @@ export default function InputRoot({
       className={twMerge(
         'relative h-14 w-full border border-eden-100 bg-transparent shadow-lg shadow-dark/20',
         'valid:[&_>input]:bg-eden-100/30 focus:[&_>input]:bg-eden-100/30',
-        clsx(errorMessage && 'border-terracotta-500'),
-
         className,
+        clsx(errorMessage && 'border-terracotta-500'),
       )}
     >
       {children}

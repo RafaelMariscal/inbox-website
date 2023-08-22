@@ -14,13 +14,17 @@ import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
 
 export default function GetQuoteForm() {
-  const useFormReturn = useQuoteFormContext()
-  if (useFormReturn === null) return <></>
-  const { useQuoteForm } = useFormReturn
+  const ctxReturn = useQuoteFormContext()
+  if (ctxReturn === null) return <></>
+  const { useQuoteForm } = ctxReturn
   const {
     handleSubmit,
+    register,
+    watch,
+    setValue,
     formState: { errors },
   } = useQuoteForm
+  const serviceModelValue = watch('serviceModel')
 
   const quoteFormSubmit = (data: QuoteFormData) => {
     console.log(data)
@@ -43,7 +47,7 @@ export default function GetQuoteForm() {
       <form onSubmit={handleSubmit(quoteFormSubmit)}>
         <div className="grid grid-cols-2 gap-3 gap-x-6">
           <Input.Root errorMessage={errors.name}>
-            <Input.Input name="name" />
+            <Input.Input<QuoteFormData> inputName="name" register={register} />
             <Input.Container>
               <Input.Label>Nome</Input.Label>
             </Input.Container>
@@ -52,7 +56,7 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.role}>
-            <Input.Input name="role" />
+            <Input.Input<QuoteFormData> inputName="role" register={register} />
             <Input.Container>
               <Input.Label>Cargo</Input.Label>
             </Input.Container>
@@ -61,7 +65,7 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.email}>
-            <Input.Input name="email" />
+            <Input.Input<QuoteFormData> inputName="email" register={register} />
             <Input.Container>
               <Input.Label>Email</Input.Label>
             </Input.Container>
@@ -70,7 +74,7 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.phone}>
-            <Input.Input name="phone" />
+            <Input.Input<QuoteFormData> inputName="phone" register={register} />
             <Input.Container>
               <Input.Label>Telefone</Input.Label>
             </Input.Container>
@@ -79,7 +83,10 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.companyName}>
-            <Input.Input name="companyName" />
+            <Input.Input<QuoteFormData>
+              inputName="companyName"
+              register={register}
+            />
             <Input.Container>
               <Input.Label>Nome da Empresa</Input.Label>
             </Input.Container>
@@ -88,7 +95,7 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.cnpj}>
-            <Input.Input name="cnpj" />
+            <Input.Input<QuoteFormData> inputName="cnpj" register={register} />
             <Input.Container>
               <Input.Label>CNPJ</Input.Label>
             </Input.Container>
@@ -97,7 +104,10 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.address}>
-            <Input.Input name="address" />
+            <Input.Input<QuoteFormData>
+              inputName="address"
+              register={register}
+            />
             <Input.Container>
               <Input.Label>Endereço</Input.Label>
             </Input.Container>
@@ -105,9 +115,11 @@ export default function GetQuoteForm() {
               <Input.ErrorMessage errorMessage={errors.address.message} />
             )}
           </Input.Root>
-          <Input.Select
+          <Input.Select<QuoteFormData>
             name="serviceModel"
             placeholder="Modal de Serviço"
+            value={serviceModelValue}
+            setValue={setValue}
             errorMessage={errors?.serviceModel?.message}
             options={SERVICES}
           />
@@ -166,22 +178,25 @@ export default function GetQuoteForm() {
               ))}
             </MealRequest.Table>
           )}
-          <MealRequestDialog
-            customClassName={{
-              before: 'left-1/2 mt-4 -translate-x-1/2',
-              className: 'h-9 px-4',
-            }}
-          >
-            Adicionar Refeição
-            <Soup size={16} strokeWidth={2} fillOpacity={0} />
-          </MealRequestDialog>
         </MealRequest.Root>
-
-        <Button type="submit" variant="stroke" className="w-full">
+        <Button
+          type="submit"
+          variant="stroke"
+          className=" left-1/2 w-full max-w-sm -translate-x-1/2"
+        >
           Enviar Solicitação de Orçamento
           <Send size={16} strokeWidth={2.5} fillOpacity={0} />
         </Button>
       </form>
+      <MealRequestDialog
+        customClassName={{
+          before: '-top-32 left-1/2 mt-4 -translate-x-1/2',
+          className: 'h-9 px-4',
+        }}
+      >
+        Adicionar Refeição
+        <Soup size={16} strokeWidth={2} fillOpacity={0} />
+      </MealRequestDialog>
     </section>
   )
 }
