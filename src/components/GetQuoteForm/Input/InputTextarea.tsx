@@ -28,7 +28,6 @@ export default function InputTextarea<T>({
       )}
       {...register(inputName, { required: true })}
       required
-      maxLength={400}
     />
   )
 }

@@ -1,3 +1,4 @@
+import InputCharCounter from './InputCharCounter'
 import InputContainer from './InputContainer'
 import InputErrorMessages from './InputErrorMessages'
 import InputLabel from './InputLabel'
@@ -14,6 +15,7 @@ const Input = {
   Container: InputContainer,
   Label: InputLabel,
   ErrorMessage: InputErrorMessages,
+  CharCounter: InputCharCounter,
 }
 
 export default Input

@@ -9,6 +9,7 @@ import { useMealRequestFormContext } from '@/contexts/MealRequestFormContext/hoo
 import { MealRequestFormData } from '@/contexts/MealRequestFormContext/porvider'
 import MEAL_TYPE_OPTIONS from '@/mocks/mealTypeMocks'
 import MEAL_TIME_OPTIONS from '@/mocks/mealTimeOptionMock'
+import clsx from 'clsx'
 
 interface CustomClassNameProps {
   before?: string
@@ -42,6 +43,10 @@ export default function MealRequestDialog({
 
   const mealTypeValue = watch('mealType')
   const mealTimeValue = watch('mealTime')
+  const mealDescriptionValue = watch('mealDescription')
+  const mealDescriptionTotalChars = mealDescriptionValue?.length || 0
+  const FieldTextMaxChars = 400
+  const CharCouterValue = FieldTextMaxChars - mealDescriptionTotalChars
 
   const handleMealRequestDialogSubmit = (data: MealRequestFormData) => {
     console.log('MealRequestDialogForm Submitted', { data })
@@ -205,6 +210,7 @@ export default function MealRequestDialog({
                   inputName="mealDescription"
                   register={register}
                   className="align-baseline"
+                  maxLength={FieldTextMaxChars}
                 />
                 <Input.Container>
                   <Input.Label>Composição da refeição</Input.Label>
@@ -215,6 +221,17 @@ export default function MealRequestDialog({
                   />
                 )}
               </Input.Root>
+              <Input.CharCounter
+                className={twMerge(
+                  'mt-1 text-end opacity-60',
+                  clsx(CharCouterValue === 0 && 'text-terracotta-500'),
+                )}
+              >
+                {CharCouterValue === 0
+                  ? 'Máximo de caractéres atingido.'
+                  : `Restam ${CharCouterValue} caracteres.`}
+              </Input.CharCounter>
+
               <Button variant="stroke" className="mt-4 w-full">
                 {meal ? ' Confirmar Edição' : 'Adicionar à Solicitação'}
                 <ListPlus size={18} strokeWidth={2} fillOpacity={0} />
