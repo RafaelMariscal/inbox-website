@@ -34,7 +34,7 @@ export default function InputSelect<T>({
       value={value}
       onValueChange={(value) => setValue(name, value as PathValue<T, Path<T>>)}
     >
-      <div className="relative">
+      <div className={twMerge('relative', className)}>
         <Select.Trigger
           className={twMerge(
             'relative h-14 w-full border border-eden-100',
@@ -48,8 +48,8 @@ export default function InputSelect<T>({
         >
           <div
             className={twMerge(
-              'flex-1 text-center',
-              clsx(value === ' ' && 'opacity-50'),
+              'flex-1 text-center opacity-50',
+              clsx(value && 'opacity-100'),
             )}
           >
             <Select.Value placeholder={placeholder} />

@@ -1,7 +1,7 @@
 import { MealsProps } from '@/@types/MealTypes'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ListPlus, X } from 'lucide-react'
-import { ComponentProps, useEffect, useState } from 'react'
+import { ComponentProps, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Input from '../Input'
 import Button from '@/components/Button'
@@ -60,6 +60,7 @@ export default function MealRequestDialog({
       reset()
     }
   }
+
   return (
     <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
       <Dialog.Trigger
@@ -92,13 +93,14 @@ export default function MealRequestDialog({
           {children}
         </div>
       </Dialog.Trigger>
+
       <Dialog.Portal>
         <Dialog.Overlay
           className="
-          fixed inset-0 z-10 grid place-items-center bg-dark/20
-          data-[state=closed]:animate-[hide_300ms]
-          data-[state=open]:animate-[show_200ms]
-      "
+            fixed inset-0 z-10 grid place-items-center bg-dark/20
+            data-[state=closed]:animate-[hide_300ms]
+            data-[state=open]:animate-[show_200ms]
+          "
         >
           <Dialog.Content
             className="
@@ -127,9 +129,11 @@ export default function MealRequestDialog({
               Complete o formulário para adicionar uma nova refeição à
               solicitação.
             </Dialog.Description>
+
             <form
               className="mt-3"
               onSubmit={handleSubmit(handleMealRequestDialogSubmit)}
+              noValidate
             >
               <div className="mb-2 grid grid-cols-3 grid-rows-2 gap-2">
                 <Input.Select<MealRequestFormData>
@@ -148,7 +152,7 @@ export default function MealRequestDialog({
                   setValue={setValue}
                   errorMessage={errors?.mealTime?.message}
                   options={MEAL_TIME_OPTIONS}
-                  className="max-w-[9rem]"
+                  className=""
                 />
                 <Input.Root errorMessage={errors?.weekDaysQuantities}>
                   <Input.Input<MealRequestFormData>
@@ -197,9 +201,10 @@ export default function MealRequestDialog({
                 className="h-40"
                 errorMessage={errors?.mealDescription}
               >
-                <Input.Input<MealRequestFormData>
+                <Input.Textarea<MealRequestFormData>
                   inputName="mealDescription"
                   register={register}
+                  className="align-baseline"
                 />
                 <Input.Container>
                   <Input.Label>Composição da refeição</Input.Label>

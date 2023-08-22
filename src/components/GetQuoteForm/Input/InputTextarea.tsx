@@ -2,31 +2,33 @@ import { ComponentProps } from 'react'
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 
-type InputTextProps<T extends FieldValues> = ComponentProps<'input'> & {
+type InputTextareaProps<T extends FieldValues> = ComponentProps<'textarea'> & {
   inputName: Path<T>
   register: UseFormRegister<T>
 }
 
-export default function InputText<T>({
+export default function InputTextarea<T>({
   className,
   inputName,
   register,
   ...rest
-}: InputTextProps<{ [key in keyof T]: T[key] }>) {
+}: InputTextareaProps<{ [key in keyof T]: T[key] }>) {
   return (
-    <input
+    <textarea
       {...rest}
       className={twMerge(
-        'absolute inset-0 z-10 bg-transparent px-4 pt-2 outline-none',
-        'truncate font-semibold',
+        'absolute inset-0 z-10 mt-5 bg-transparent px-4 outline-none',
+        'resize-none text-ellipsis whitespace-normal font-semibold',
         '[&_~*]:valid:top-[.125rem] [&_~*]:focus:top-[.125rem]',
         '[&_~*]:valid:text-[.625rem] [&_~*]:focus:text-[.625rem]',
         '[&_~*]:valid:opacity-100 [&_~*]:focus:opacity-100',
         '[&_~*]:valid:z-10 [&_~*]:focus:z-10',
+        '',
         className,
       )}
       {...register(inputName, { required: true })}
       required
+      maxLength={400}
     />
   )
 }

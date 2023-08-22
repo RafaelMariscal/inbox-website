@@ -12,8 +12,6 @@ import MealRequestDialog from './MealRequestDialog'
 import { Send, Soup } from 'lucide-react'
 import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
-import { useState } from 'react'
-import { MealsProps } from '@/@types/MealTypes'
 
 export default function GetQuoteForm() {
   const ctxReturn = useQuoteFormContext()
@@ -46,7 +44,7 @@ export default function GetQuoteForm() {
         </CustomLink>
       </div>
 
-      <form onSubmit={handleSubmit(quoteFormSubmit)}>
+      <form onSubmit={handleSubmit(quoteFormSubmit)} noValidate>
         <div className="grid grid-cols-2 gap-3 gap-x-6">
           <Input.Root errorMessage={errors.name}>
             <Input.Input<QuoteFormData> inputName="name" register={register} />

@@ -4,10 +4,12 @@ import InputLabel from './InputLabel'
 import InputRoot from './InputRoot'
 import InputSelect from './InputSelect'
 import InputText from './InputText'
+import InputTextarea from './InputTextarea'
 
 const Input = {
   Root: InputRoot,
   Input: InputText,
+  Textarea: InputTextarea,
   Select: InputSelect,
   Container: InputContainer,
   Label: InputLabel,
