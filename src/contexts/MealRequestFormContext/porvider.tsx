@@ -17,21 +17,14 @@ export const mealRequestFormSchema = z.object({
     .nonempty({ message: 'Campo obrigatório.' })
     .min(3, { message: 'Mínimo de 3 caracteres.' })
     .max(200, { message: 'Máximo de 200 caracteres.' }),
-  weekDaysQuantities: z
-    .string({ required_error: 'Campo obrigatório.' })
-    .nonempty({ message: 'Campo obrigatório.' })
-    .email({ message: 'Email inválido' }),
-  saturdayQuantities: z
-    .string({ required_error: 'Campo obrigatório.' })
-    .nonempty({ message: 'Campo obrigatório.' }),
-  sundaysQuantities: z
+  weekDaysQuantities: z.string({ required_error: 'Campo obrigatório.' }),
+  saturdayQuantities: z.string({ required_error: 'Campo obrigatório.' }),
+  sundaysQuantities: z.string({ required_error: 'Campo obrigatório.' }),
+  mealDescription: z
     .string({ required_error: 'Campo obrigatório.' })
     .nonempty({ message: 'Campo obrigatório.' })
     .min(3, { message: 'Mínimo de 3 caracteres.' })
-    .max(200, { message: 'Máximo de 200 caracteres.' }),
-  mealDescription: z
-    .string({ required_error: 'Campo obrigatório.' })
-    .nonempty({ message: 'Campo obrigatório.' }),
+    .max(400, { message: 'Máximo de 400 caracteres.' }),
 })
 export type MealRequestFormData = z.infer<typeof mealRequestFormSchema>
 

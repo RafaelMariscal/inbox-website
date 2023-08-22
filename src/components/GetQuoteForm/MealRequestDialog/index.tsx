@@ -1,6 +1,13 @@
 import { MealsProps } from '@/@types/MealTypes'
 import * as Dialog from '@radix-ui/react-dialog'
-import { ListPlus, X } from 'lucide-react'
+import {
+  Delete,
+  ListMinus,
+  ListPlus,
+  ListX,
+  RemoveFormattingIcon,
+  X,
+} from 'lucide-react'
 import { ComponentProps, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Input from '../Input'
@@ -231,11 +238,22 @@ export default function MealRequestDialog({
                   ? 'Máximo de caractéres atingido.'
                   : `Restam ${CharCouterValue} caracteres.`}
               </Input.CharCounter>
-
-              <Button variant="stroke" className="mt-4 w-full">
-                {meal ? ' Confirmar Edição' : 'Adicionar à Solicitação'}
-                <ListPlus size={18} strokeWidth={2} fillOpacity={0} />
-              </Button>
+              <div className="flex gap-4">
+                {meal ? (
+                  <Button
+                    type="button"
+                    variant="danger"
+                    className="mt-4 w-max whitespace-nowrap"
+                  >
+                    Excluir Refeição
+                    <Delete size={18} strokeWidth={2} fillOpacity={0} />
+                  </Button>
+                ) : null}
+                <Button type="submit" variant="stroke" className="mt-4 w-full">
+                  {meal ? ' Confirmar Edição' : 'Adicionar à Solicitação'}
+                  <ListPlus size={18} strokeWidth={2} fillOpacity={0} />
+                </Button>
+              </div>
             </form>
           </Dialog.Content>
         </Dialog.Overlay>

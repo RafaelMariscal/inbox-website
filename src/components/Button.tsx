@@ -4,7 +4,7 @@ import { ComponentProps } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 type ButtonRootProps = ComponentProps<'button'> & {
-  variant: 'light' | 'eden' | 'stroke'
+  variant: 'light' | 'eden' | 'stroke' | 'danger'
 }
 
 export default function Button({
@@ -16,6 +16,7 @@ export default function Button({
   return (
     <button
       {...rest}
+      data-variant={variant}
       className={twMerge(
         'relative inline-block h-9 bg-salen-500 shadow-button outline-none',
         'before:block before:h-2 before:w-2 before:bg-salen-500',
@@ -31,6 +32,15 @@ export default function Button({
         '[&_div]:focus:bg-eden-700 [&_div]:focus:text-send-500',
         '[&_*]:hover:fill-send-500 [&_*]:focus:fill-send-500',
         '[&_*]:hover:border-salen-500 [&_*]:focus:border-salen-500',
+        'data-[variant=danger]:bg-terracotta-100',
+        'data-[variant=danger]:before:bg-terracotta-100',
+        'data-[variant=danger]:after:bg-terracotta-100',
+        'data-[variant=danger]:[&_div]:hover:bg-terracotta-500',
+        'data-[variant=danger]:[&_div]:hover:text-light',
+        'data-[variant=danger]:[&_div]:focus:text-light',
+        'data-[variant=danger]:[&_*]:hover:border-terracotta-300',
+        'data-[variant=danger]:[&_*]:focus:border-terracotta-300',
+
         className,
       )}
     >
@@ -44,6 +54,8 @@ export default function Button({
           'data-[variant=light]:bg-eden-100 data-[variant=light]:text-eden-700',
           'data-[variant=stroke]:bg-eden-700 data-[variant=stroke]:text-eden-100',
           'data-[variant=stroke]:border data-[variant=stroke]:border-eden-100',
+          'data-[variant=danger]:bg-terracotta-500 data-[variant=danger]:text-light',
+          'data-[variant=danger]:border data-[variant=danger]:border-light',
         )}
       >
         {children}
