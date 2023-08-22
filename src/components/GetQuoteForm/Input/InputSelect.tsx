@@ -71,7 +71,7 @@ export default function InputSelect<T>({
             'data-[state=open]:animate-[show_300ms_forwards]',
           )}
         >
-          <Select.Viewport>
+          <Select.Viewport className="max-h-52">
             {options.map((option, i) => (
               <Select.Item
                 key={option}

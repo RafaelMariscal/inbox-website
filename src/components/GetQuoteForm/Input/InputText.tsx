@@ -16,6 +16,7 @@ export default function InputText<T>({
   return (
     <input
       {...rest}
+      {...register(inputName)}
       className={twMerge(
         'absolute inset-0 z-10 bg-transparent px-4 pt-2 outline-none',
         'truncate font-semibold',
@@ -25,7 +26,6 @@ export default function InputText<T>({
         '[&_~*]:valid:z-10 [&_~*]:focus:z-10',
         className,
       )}
-      {...register(inputName)}
     />
   )
 }

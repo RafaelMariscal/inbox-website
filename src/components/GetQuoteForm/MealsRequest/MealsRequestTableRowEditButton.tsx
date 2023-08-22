@@ -3,17 +3,14 @@ import MealRequestDialog from '../MealRequestDialog'
 import { MealsProps } from '@/@types/MealTypes'
 
 type MealsRequestTableRowEditButtonProps = {
-  mealSelected?: MealsProps
+  meal: MealsProps
 }
 
 export default function MealsRequestTableRowEditButton({
-  mealSelected,
+  meal,
 }: MealsRequestTableRowEditButtonProps) {
   return (
-    <MealRequestDialog
-      mealSelected={mealSelected}
-      customClassName={{ className: 'p-1' }}
-    >
+    <MealRequestDialog meal={meal} customClassName={{ className: 'p-1' }}>
       <FileEdit size={16} strokeWidth={2} />
     </MealRequestDialog>
   )

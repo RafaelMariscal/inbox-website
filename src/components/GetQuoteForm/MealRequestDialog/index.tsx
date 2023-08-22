@@ -1,12 +1,14 @@
 import { MealsProps } from '@/@types/MealTypes'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ListPlus, X } from 'lucide-react'
-import { ComponentProps, useState } from 'react'
+import { ComponentProps, useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Input from '../Input'
 import Button from '@/components/Button'
 import { useMealRequestFormContext } from '@/contexts/MealRequestFormContext/hook'
 import { MealRequestFormData } from '@/contexts/MealRequestFormContext/porvider'
+import MEAL_TYPE_OPTIONS from '@/mocks/mealTypeMocks'
+import MEAL_TIME_OPTIONS from '@/mocks/mealTimeOptionMock'
 
 interface CustomClassNameProps {
   before?: string
@@ -15,17 +17,17 @@ interface CustomClassNameProps {
 
 type MealRequestDialogProps = ComponentProps<'div'> & {
   customClassName?: CustomClassNameProps
-  mealSelected?: MealsProps
+  meal: MealsProps | null
 }
 
 export default function MealRequestDialog({
   children,
   className,
-  mealSelected,
+  meal,
   customClassName,
 }: MealRequestDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const errorMessage = undefined
+
   const ctxReturn = useMealRequestFormContext()
   if (ctxReturn === null) return <></>
   const { MealRequestForm } = ctxReturn
@@ -34,6 +36,7 @@ export default function MealRequestDialog({
     register,
     watch,
     setValue,
+    reset,
     formState: { errors },
   } = MealRequestForm
 
@@ -44,8 +47,21 @@ export default function MealRequestDialog({
     console.log('MealRequestDialogForm Submitted', { data })
   }
 
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open)
+    if (meal) {
+      setValue('mealType', meal.type)
+      setValue('mealTime', meal.timeToServe)
+      setValue('weekDaysQuantities', String(meal.quantities.weekdays))
+      setValue('saturdayQuantities', String(meal.quantities.onSaturdays))
+      setValue('sundaysQuantities', String(meal.quantities.onSundays))
+      setValue('mealDescription', String(meal.mealDescription))
+    } else {
+      reset()
+    }
+  }
   return (
-    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
       <Dialog.Trigger
         className={twMerge(
           'relative inline-block bg-salen-500 shadow-button outline-none',
@@ -93,8 +109,8 @@ export default function MealRequestDialog({
           >
             <header className="mb-1 flex items-center justify-between">
               <Dialog.Title className="font-semibold leading-tight tracking-wide">
-                {mealSelected
-                  ? `Editar Refeição: ${mealSelected.type}`
+                {meal
+                  ? `Editar Refeição: ${meal.type}`
                   : 'Adicionar nova Refeição'}
               </Dialog.Title>
               <Dialog.Close
@@ -122,7 +138,7 @@ export default function MealRequestDialog({
                   value={mealTypeValue}
                   setValue={setValue}
                   errorMessage={errors?.mealType?.message}
-                  options={['', 'test1', 'test2', 'test3']}
+                  options={MEAL_TYPE_OPTIONS}
                   className="col-span-2"
                 />
                 <Input.Select
@@ -131,7 +147,7 @@ export default function MealRequestDialog({
                   value={mealTimeValue}
                   setValue={setValue}
                   errorMessage={errors?.mealTime?.message}
-                  options={['', 'test1', 'test2', 'test3']}
+                  options={MEAL_TIME_OPTIONS}
                   className="max-w-[9rem]"
                 />
                 <Input.Root errorMessage={errors?.weekDaysQuantities}>
@@ -142,8 +158,10 @@ export default function MealRequestDialog({
                   <Input.Container>
                     <Input.Label>Qtd. seg. à sex.</Input.Label>
                   </Input.Container>
-                  {errorMessage && (
-                    <Input.ErrorMessage errorMessage={errorMessage} />
+                  {errors?.weekDaysQuantities && (
+                    <Input.ErrorMessage
+                      errorMessage={errors?.weekDaysQuantities.message}
+                    />
                   )}
                 </Input.Root>
                 <Input.Root errorMessage={errors?.saturdayQuantities}>
@@ -154,8 +172,10 @@ export default function MealRequestDialog({
                   <Input.Container>
                     <Input.Label>Qtd. sábado</Input.Label>
                   </Input.Container>
-                  {errorMessage && (
-                    <Input.ErrorMessage errorMessage={errorMessage} />
+                  {errors?.saturdayQuantities && (
+                    <Input.ErrorMessage
+                      errorMessage={errors?.saturdayQuantities.message}
+                    />
                   )}
                 </Input.Root>
                 <Input.Root errorMessage={errors?.sundaysQuantities}>
@@ -166,8 +186,10 @@ export default function MealRequestDialog({
                   <Input.Container>
                     <Input.Label>Qtd. domingo</Input.Label>
                   </Input.Container>
-                  {errorMessage && (
-                    <Input.ErrorMessage errorMessage={errorMessage} />
+                  {errors?.sundaysQuantities && (
+                    <Input.ErrorMessage
+                      errorMessage={errors?.sundaysQuantities.message}
+                    />
                   )}
                 </Input.Root>
               </div>
@@ -182,12 +204,14 @@ export default function MealRequestDialog({
                 <Input.Container>
                   <Input.Label>Composição da refeição</Input.Label>
                 </Input.Container>
-                {errorMessage && (
-                  <Input.ErrorMessage errorMessage={errorMessage} />
+                {errors?.mealDescription && (
+                  <Input.ErrorMessage
+                    errorMessage={errors?.mealDescription.message}
+                  />
                 )}
               </Input.Root>
               <Button variant="stroke" className="mt-4 w-full">
-                {mealSelected ? ' Confirmar Edição' : 'Adicionar à Solicitação'}
+                {meal ? ' Confirmar Edição' : 'Adicionar à Solicitação'}
                 <ListPlus size={18} strokeWidth={2} fillOpacity={0} />
               </Button>
             </form>

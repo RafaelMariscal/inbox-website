@@ -12,6 +12,8 @@ import MealRequestDialog from './MealRequestDialog'
 import { Send, Soup } from 'lucide-react'
 import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
+import { useState } from 'react'
+import { MealsProps } from '@/@types/MealTypes'
 
 export default function GetQuoteForm() {
   const ctxReturn = useQuoteFormContext()
@@ -173,7 +175,7 @@ export default function GetQuoteForm() {
                       {meal.mealDescription}
                     </MealRequest.RowContentCell>
                   </MealRequest.RowContent>
-                  <MealRequest.RowEditButton mealSelected={meal} />
+                  <MealRequest.RowEditButton meal={meal} />
                 </MealRequest.TableRow>
               ))}
             </MealRequest.Table>
@@ -189,6 +191,7 @@ export default function GetQuoteForm() {
         </Button>
       </form>
       <MealRequestDialog
+        meal={null}
         customClassName={{
           before: '-top-32 left-1/2 mt-4 -translate-x-1/2',
           className: 'h-9 px-4',
