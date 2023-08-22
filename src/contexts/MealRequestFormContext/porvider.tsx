@@ -17,9 +17,28 @@ export const mealRequestFormSchema = z.object({
     .nonempty({ message: 'Campo obrigatório.' })
     .min(3, { message: 'Mínimo de 3 caracteres.' })
     .max(200, { message: 'Máximo de 200 caracteres.' }),
-  weekDaysQuantities: z.string({ required_error: 'Campo obrigatório.' }),
-  saturdayQuantities: z.string({ required_error: 'Campo obrigatório.' }),
-  sundaysQuantities: z.string({ required_error: 'Campo obrigatório.' }),
+  weekDaysQuantities: z
+    .number({
+      required_error: 'Campo obrigatório.',
+      invalid_type_error: 'Campo obrigatório: 0-9',
+    })
+    .int({ message: 'Apenas números inteiros' })
+    .nonnegative({ message: 'Apenas números positivos.' })
+    .min(40, { message: 'Mínimo de 40 refeições' }),
+  saturdayQuantities: z
+    .number({
+      required_error: 'Campo obrigatório.',
+      invalid_type_error: 'Campo obrigatório: 0-9',
+    })
+    .int({ message: 'Apenas números inteiros' })
+    .nonnegative({ message: 'Apenas números positivos.' }),
+  sundaysQuantities: z
+    .number({
+      required_error: 'Campo obrigatório.',
+      invalid_type_error: 'Campo obrigatório: 0-9',
+    })
+    .int({ message: 'Apenas números inteiros' })
+    .nonnegative({ message: 'Apenas números positivos.' }),
   mealDescription: z
     .string({ required_error: 'Campo obrigatório.' })
     .nonempty({ message: 'Campo obrigatório.' })

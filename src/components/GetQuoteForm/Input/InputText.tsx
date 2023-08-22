@@ -25,7 +25,10 @@ export default function InputText<T>({
         '[&_~*]:valid:z-10 [&_~*]:focus:z-10',
         className,
       )}
-      {...register(inputName, { required: true })}
+      {...register(inputName, {
+        required: true,
+        valueAsNumber: rest.type === 'number' ? true : undefined,
+      })}
       required
     />
   )

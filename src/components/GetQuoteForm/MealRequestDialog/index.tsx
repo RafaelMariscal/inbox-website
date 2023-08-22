@@ -64,10 +64,10 @@ export default function MealRequestDialog({
     if (meal) {
       setValue('mealType', meal.type)
       setValue('mealTime', meal.timeToServe)
-      setValue('weekDaysQuantities', String(meal.quantities.weekdays))
-      setValue('saturdayQuantities', String(meal.quantities.onSaturdays))
-      setValue('sundaysQuantities', String(meal.quantities.onSundays))
-      setValue('mealDescription', String(meal.mealDescription))
+      setValue('weekDaysQuantities', meal.quantities.weekdays)
+      setValue('saturdayQuantities', meal.quantities.onSaturdays)
+      setValue('sundaysQuantities', meal.quantities.onSundays)
+      setValue('mealDescription', meal.mealDescription)
     } else {
       reset()
     }
@@ -170,6 +170,7 @@ export default function MealRequestDialog({
                   <Input.Input<MealRequestFormData>
                     inputName="weekDaysQuantities"
                     register={register}
+                    type="number"
                   />
                   <Input.Container>
                     <Input.Label>Qtd. seg. à sex.</Input.Label>
@@ -184,6 +185,7 @@ export default function MealRequestDialog({
                   <Input.Input<MealRequestFormData>
                     inputName="saturdayQuantities"
                     register={register}
+                    type="number"
                   />
                   <Input.Container>
                     <Input.Label>Qtd. sábado</Input.Label>
@@ -198,6 +200,7 @@ export default function MealRequestDialog({
                   <Input.Input<MealRequestFormData>
                     inputName="sundaysQuantities"
                     register={register}
+                    type="number"
                   />
                   <Input.Container>
                     <Input.Label>Qtd. domingo</Input.Label>
