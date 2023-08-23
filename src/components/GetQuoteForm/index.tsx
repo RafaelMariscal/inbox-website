@@ -11,6 +11,7 @@ import MealRequestDialog from './MealRequestDialog'
 import { Send, Soup } from 'lucide-react'
 import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
+import clsx from 'clsx'
 
 export default function GetQuoteForm() {
   const ctxReturn = useQuoteFormContext()
@@ -125,7 +126,15 @@ export default function GetQuoteForm() {
         </div>
       </form>
 
-      <MealRequest.Root className="mb-6">
+      <MealRequest.Root
+        className={clsx(
+          'relative mb-6',
+          errors?.mealsRequest && 'border-terracotta-500',
+        )}
+      >
+        {errors?.mealsRequest && (
+          <Input.ErrorMessage errorMessage={errors?.mealsRequest.message} />
+        )}
         <MealRequest.Title>Refeições Solicitadas:</MealRequest.Title>
         {mealsRequested.length === 0 ? (
           <MealRequest.EmptyState />
@@ -199,17 +208,6 @@ export default function GetQuoteForm() {
         Enviar Solicitação de Orçamento
         <Send size={16} strokeWidth={2.5} fillOpacity={0} />
       </Button>
-
-      {/* <MealRequestDialog
-        meal={null}
-        customClassName={{
-          before: '-top-32 left-1/2 mt-4 -translate-x-1/2',
-          className: 'h-9 px-4',
-        }}
-      >
-        Adicionar Refeição
-        <Soup size={16} strokeWidth={2} fillOpacity={0} />
-      </MealRequestDialog> */}
     </section>
   )
 }

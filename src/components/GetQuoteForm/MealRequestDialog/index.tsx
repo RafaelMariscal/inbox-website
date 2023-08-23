@@ -191,6 +191,7 @@ export default function MealRequestDialog({
                       inputName="weekDaysQuantities"
                       register={register}
                       type="number"
+                      className="text-center"
                     />
                     <Input.Container>
                       <Input.Label>Qtd. seg. à sex.</Input.Label>
@@ -206,6 +207,7 @@ export default function MealRequestDialog({
                       inputName="saturdayQuantities"
                       register={register}
                       type="number"
+                      className="text-center"
                     />
                     <Input.Container>
                       <Input.Label>Qtd. sábado</Input.Label>
@@ -221,6 +223,7 @@ export default function MealRequestDialog({
                       inputName="sundaysQuantities"
                       register={register}
                       type="number"
+                      className="text-center"
                     />
                     <Input.Container>
                       <Input.Label>Qtd. domingo</Input.Label>

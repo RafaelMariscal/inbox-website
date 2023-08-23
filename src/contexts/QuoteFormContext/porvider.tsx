@@ -51,7 +51,7 @@ export const quoteFormSchema = z.object({
     .max(200, { message: 'Máximo de 200 caracteres.' }),
   mealsRequest: array(mealRequestFormSchema, {
     invalid_type_error: 'invalid mealRequest type',
-    required_error: 'Refeições precisam ser adicionadas a requisição.',
+    required_error: 'Refeições precisam ser adicionadas à requisição.',
   })
     .min(1, { message: 'Refeições precisam ser adicionadas a requisição.' })
     .max(12, { message: 'Refeições precisam ser adicionadas a requisição.' }),
@@ -72,7 +72,7 @@ export const GlobalQuoteFormProvider = ({
   const useQuoteForm = useForm<QuoteFormData>({
     resolver: zodResolver(quoteFormSchema),
   })
-  const { setValue } = useQuoteForm
+  const { setValue, clearErrors } = useQuoteForm
 
   const addMealRequest = (data: MealRequestFormData) => {
     setTimeout(() => {
@@ -82,6 +82,7 @@ export const GlobalQuoteFormProvider = ({
         setValue('mealsRequest', [...prev, newMealRequest])
         return [...prev, newMealRequest]
       })
+      clearErrors('mealsRequest')
     }, 1000)
   }
   const editMealRequest = (
