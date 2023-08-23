@@ -11,7 +11,7 @@ export default function GetQuote() {
           Nossa equipe está à disposição para retirar qualquer dúvida.
         </p>
       </div>
-      <CustomLink href="#quoteForm" scroll variant="light">
+      <CustomLink href="#quoteForm" variant="light">
         Solicitar Orçamento
       </CustomLink>
     </div>

@@ -28,7 +28,7 @@ export default function Hero() {
       </h2>
 
       <div className="flex w-full max-w-screen-phones-sm flex-col gap-6">
-        <CustomLink variant="light" href="#quoteForm" scroll className="w-full">
+        <CustomLink variant="light" href="#quoteForm" className="w-full">
           Solicitar Orçamento
         </CustomLink>
         <CustomLink variant="stroke" href="" className="w-full">

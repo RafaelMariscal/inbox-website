@@ -50,25 +50,21 @@ export default function Footer() {
         <FooterSection.Root>
           <FooterSection.Title>Acesso Rápido</FooterSection.Title>
 
-          <FooterSection.Link href={'#hero'} scroll>
-            Home
-          </FooterSection.Link>
-          <FooterSection.Link href={'#services'} scroll>
+          <FooterSection.Link href={'#hero'}>Home</FooterSection.Link>
+          <FooterSection.Link href={'#services'}>
             Nossos Serviços
           </FooterSection.Link>
-          <FooterSection.Link href={'#advantages'} scroll>
+          <FooterSection.Link href={'#advantages'}>
             Vantagens
           </FooterSection.Link>
-          <FooterSection.Link href={'#about'} scroll>
-            Quem Somos
-          </FooterSection.Link>
-          <FooterSection.Link href={'#pillars'} scroll>
+          <FooterSection.Link href={'#about'}>Quem Somos</FooterSection.Link>
+          <FooterSection.Link href={'#pillars'}>
             Nossos Pilares
           </FooterSection.Link>
-          <FooterSection.Link href={'#testemonials'} scroll>
+          <FooterSection.Link href={'#testemonials'}>
             Depoimentos
           </FooterSection.Link>
-          <FooterSection.Link href={'#'} scroll>
+          <FooterSection.Link href={'#'}>
             Solicitar Orçamento
           </FooterSection.Link>
         </FooterSection.Root>

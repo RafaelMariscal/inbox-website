@@ -1,4 +1,14 @@
-import { MealsProps, MealTypeEnum } from '@/@types/MealTypes'
+import { MealsProps } from '@/@types/MealTypes'
+
+export enum MealTypeEnum {
+  breakfast = 'Desjejum',
+  lunch = 'Almoço',
+  dinner = 'Jantar',
+  supper = 'Ceia',
+  snack = 'Lanche',
+  coffeeBreak = 'Coffee Break',
+  other = 'Outro',
+}
 
 const MEALS: MealsProps[] = [
   {

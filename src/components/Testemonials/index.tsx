@@ -39,7 +39,7 @@ const TESTEMONIALS: Testemonial[] = [
     name: 'Erlândia Dias Rocha',
     description: 'Costureira',
     testemonial:
-      'Sou costureira e trabalho muito sentada, por isso preciso comer de forma mais saudável, sabe? Aí escolhi pelo cardápio da dieta e ela vem muito gostosa. Penso até que não estou fazendo dieta.',
+      'Trabalho muito sentada, e por isso preciso comer de forma mais saudável, sabe? Então escolhi pelo cardápio da dieta. E olha que ela vem muito gostosa! Penso até que não estou fazendo dieta.',
   },
   {
     id: 'Arthur Moreira',
