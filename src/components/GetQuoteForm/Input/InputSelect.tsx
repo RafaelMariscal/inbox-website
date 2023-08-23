@@ -44,7 +44,7 @@ export default function InputSelect<T>({
             'flex items-center justify-between pr-4 font-semibold',
             'shadow-lg shadow-dark/20 outline-none',
             'hover:bg-eden-100/30 focus:bg-eden-100/30',
-            'data-[disabled]:bg-red-500',
+            '[&_>div]:data-[disabled]:opacity-50',
             clsx(errorMessage && 'border-terracotta-500'),
             className,
           )}
@@ -52,7 +52,7 @@ export default function InputSelect<T>({
         >
           <div
             className={twMerge(
-              'flex-1 text-center opacity-50',
+              'flex-1 text-center',
               clsx(value && 'opacity-100'),
             )}
           >

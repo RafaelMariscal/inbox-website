@@ -69,7 +69,6 @@ export default function MealRequestDialog({
     handleCloseModal()
   }
   const handleOpenChange = (open: boolean) => {
-    setIsOpen(open)
     if (meal) {
       setValue('mealType', meal.mealType)
       setValue('mealTime', meal.mealTime)
@@ -80,10 +79,12 @@ export default function MealRequestDialog({
     } else {
       reset()
     }
+    setIsOpen(open)
+    setIsLoading(false)
   }
   const handleCloseModal = () => {
-    setIsLoading(false)
     setTimeout(() => {
+      setIsLoading(false)
       setIsOpen(false)
       reset()
     }, 300)
@@ -265,8 +266,9 @@ export default function MealRequestDialog({
                     <Button
                       type="button"
                       variant="danger"
-                      className="mt-4 w-max whitespace-nowrap"
+                      className="mt-4 w-max whitespace-nowrap disabled:pointer-events-none"
                       onClick={handleDeleteMealRequest}
+                      disabled={isLoading || isSubmitSuccessful}
                     >
                       Excluir Refeição
                       <Delete size={18} strokeWidth={2} fillOpacity={0} />
@@ -277,6 +279,7 @@ export default function MealRequestDialog({
                     form="mealRequestForm"
                     variant="stroke"
                     className="mt-4 w-full"
+                    disabled={isLoading || isSubmitSuccessful}
                   >
                     {isLoading && (
                       <Loader2

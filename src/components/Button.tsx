@@ -18,7 +18,7 @@ export default function Button({
       {...rest}
       data-variant={variant}
       className={twMerge(
-        'relative inline-block h-9 bg-salen-500 shadow-button outline-none',
+        'relative inline-block h-9 select-none bg-salen-500 shadow-button outline-none',
         'before:block before:h-2 before:w-2 before:bg-salen-500',
         'before:absolute before:left-0 before:top-0 ',
         'before:origin-top-left before:-rotate-45 before:scale-0',
@@ -40,7 +40,6 @@ export default function Button({
         'data-[variant=danger]:[&_div]:focus:text-light',
         'data-[variant=danger]:[&_*]:hover:border-terracotta-300',
         'data-[variant=danger]:[&_*]:focus:border-terracotta-300',
-
         className,
       )}
     >
