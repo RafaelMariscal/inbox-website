@@ -11,7 +11,6 @@ import MEAL_TIME_OPTIONS from '@/mocks/mealTimeOptionMock'
 import clsx from 'clsx'
 import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
 import { MealRequestedType } from '@/contexts/QuoteFormContext/porvider'
-import { UUID } from 'crypto'
 
 interface CustomClassNameProps {
   before?: string
@@ -31,12 +30,13 @@ export default function MealRequestDialog({
 }: MealRequestDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const quoteCtxReturn = useQuoteFormContext()
-  const ctxReturn = useMealRequestFormContext()
-  if (quoteCtxReturn === null || ctxReturn === null) return <></>
-  const { useQuoteForm, setMealsRequested } = quoteCtxReturn
-  const { MealRequestForm } = ctxReturn
-  const { setValue: quoteFormSetValue } = useQuoteForm
+
+  const useQuoteFormCtx = useQuoteFormContext()
+  const useMealRequestFormCtx = useMealRequestFormContext()
+  if (useQuoteFormCtx === null || useMealRequestFormCtx === null) return <></>
+
+  const { addMealRequest, editMealRequest, deleteMealRequest } = useQuoteFormCtx
+  const { MealRequestForm } = useMealRequestFormCtx
   const {
     handleSubmit,
     register,
@@ -45,51 +45,13 @@ export default function MealRequestDialog({
     reset,
     formState: { isSubmitSuccessful, errors },
   } = MealRequestForm
+
   const mealTypeValue = watch('mealType')
   const mealTimeValue = watch('mealTime')
   const mealDescriptionValue = watch('mealDescription')
   const mealDescriptionTotalChars = mealDescriptionValue?.length || 0
   const FieldTextMaxChars = 400
   const CharCouterValue = FieldTextMaxChars - mealDescriptionTotalChars
-
-  const addMealRequest = (data: MealRequestFormData) => {
-    setTimeout(() => {
-      const id = window.crypto.randomUUID() as UUID
-      const newMealRequest: MealRequestedType = { id, ...data }
-      setMealsRequested((prev) => {
-        quoteFormSetValue('mealsRequest', [...prev, newMealRequest])
-        return [...prev, newMealRequest]
-      })
-      setIsLoading(false)
-    }, 1000)
-  }
-  const editMealRequest = (
-    data: MealRequestFormData,
-    meal: MealRequestedType,
-  ) => {
-    setTimeout(() => {
-      setMealsRequested((prev) => {
-        const updatedRequests = prev.map((request) => {
-          if (request.id === meal.id)
-            return { id: request.id, ...data } as MealRequestedType
-          return request
-        })
-        quoteFormSetValue('mealsRequest', updatedRequests)
-        return updatedRequests
-      })
-      setIsLoading(false)
-    }, 1000)
-  }
-  const deleteMealRequest = (meal: MealRequestedType) => {
-    setTimeout(() => {
-      setMealsRequested((prev) => {
-        const updatedRequests = prev.filter((request) => request.id !== meal.id)
-        quoteFormSetValue('mealsRequest', updatedRequests)
-        return updatedRequests
-      })
-      setIsLoading(false)
-    }, 1000)
-  }
 
   const handleMealRequestDialogSubmit = (data: MealRequestFormData) => {
     console.log('MealRequestDialogForm submitted', { data })
@@ -102,7 +64,10 @@ export default function MealRequestDialog({
       handleCloseModal()
     }
   }
-
+  const handleDeleteMealRequest = () => {
+    if (meal) deleteMealRequest(meal)
+    handleCloseModal()
+  }
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open)
     if (meal) {
@@ -117,6 +82,7 @@ export default function MealRequestDialog({
     }
   }
   const handleCloseModal = () => {
+    setIsLoading(false)
     setTimeout(() => {
       setIsOpen(false)
       reset()
@@ -300,7 +266,7 @@ export default function MealRequestDialog({
                       type="button"
                       variant="danger"
                       className="mt-4 w-max whitespace-nowrap"
-                      onClick={() => deleteMealRequest(meal)}
+                      onClick={handleDeleteMealRequest}
                     >
                       Excluir Refeição
                       <Delete size={18} strokeWidth={2} fillOpacity={0} />

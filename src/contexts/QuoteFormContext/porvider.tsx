@@ -68,13 +68,58 @@ interface GlobalQuoteFormProviderProps {
 export const GlobalQuoteFormProvider = ({
   children,
 }: GlobalQuoteFormProviderProps) => {
-  const useFormObject = useForm<QuoteFormData>({
+  const [mealsRequested, setMealsRequested] = useState<MealRequestedType[]>([])
+  const useQuoteForm = useForm<QuoteFormData>({
     resolver: zodResolver(quoteFormSchema),
   })
-  const [mealsRequested, setMealsRequested] = useState<MealRequestedType[]>([])
+  const { setValue } = useQuoteForm
+
+  const addMealRequest = (data: MealRequestFormData) => {
+    setTimeout(() => {
+      const id = window.crypto.randomUUID() as UUID
+      const newMealRequest: MealRequestedType = { id, ...data }
+      setMealsRequested((prev) => {
+        setValue('mealsRequest', [...prev, newMealRequest])
+        return [...prev, newMealRequest]
+      })
+    }, 1000)
+  }
+  const editMealRequest = (
+    data: MealRequestFormData,
+    meal: MealRequestedType,
+  ) => {
+    setTimeout(() => {
+      setMealsRequested((prev) => {
+        const updatedRequests = prev.map((request) => {
+          if (request.id === meal.id)
+            return { id: request.id, ...data } as MealRequestedType
+          return request
+        })
+        setValue('mealsRequest', updatedRequests)
+        return updatedRequests
+      })
+    }, 1000)
+  }
+  const deleteMealRequest = (meal: MealRequestedType) => {
+    setTimeout(() => {
+      setMealsRequested((prev) => {
+        const updatedRequests = prev.filter((request) => request.id !== meal.id)
+        setValue('mealsRequest', updatedRequests)
+        return updatedRequests
+      })
+    }, 1000)
+  }
+
   return (
     <QuoteFormContext.Provider
-      value={{ useQuoteForm: useFormObject, mealsRequested, setMealsRequested }}
+      value={{
+        useQuoteForm,
+        mealsRequested,
+        setMealsRequested,
+        addMealRequest,
+        editMealRequest,
+        deleteMealRequest,
+      }}
     >
       {children}
     </QuoteFormContext.Provider>
