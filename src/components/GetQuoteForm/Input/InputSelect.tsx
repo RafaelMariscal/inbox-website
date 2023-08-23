@@ -14,6 +14,7 @@ interface InputSelectProps<T extends FieldValues> {
   setValue: UseFormSetValue<T>
   placeholder: string
   errorMessage?: string | undefined
+  disabled?: boolean
   className?: string
 }
 
@@ -23,6 +24,7 @@ export default function InputSelect<T>({
   value,
   setValue,
   errorMessage,
+  disabled = false,
   placeholder,
   className,
 }: InputSelectProps<{ [key in keyof T]: T[key] }>) {
@@ -33,6 +35,7 @@ export default function InputSelect<T>({
       onOpenChange={setOpen}
       value={value}
       onValueChange={(value) => setValue(name, value as PathValue<T, Path<T>>)}
+      disabled={disabled}
     >
       <div className={twMerge('relative', className)}>
         <Select.Trigger
@@ -41,6 +44,7 @@ export default function InputSelect<T>({
             'flex items-center justify-between pr-4 font-semibold',
             'shadow-lg shadow-dark/20 outline-none',
             'hover:bg-eden-100/30 focus:bg-eden-100/30',
+            'data-[disabled]:bg-red-500',
             clsx(errorMessage && 'border-terracotta-500'),
             className,
           )}

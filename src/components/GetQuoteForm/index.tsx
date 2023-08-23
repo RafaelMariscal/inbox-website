@@ -5,7 +5,6 @@ import WhatsappLogo from '@/assets/icons/WhatsappLogo'
 import SectionTitle from '../SectionTitle'
 import SERVICES from '@/mocks/servicesMock'
 import MealRequest from './MealsRequest'
-import MEALS from '@/mocks/mealsMock'
 import CustomLink from '../CustomLink'
 import Button from '../Button'
 import MealRequestDialog from './MealRequestDialog'
@@ -16,7 +15,7 @@ import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
 export default function GetQuoteForm() {
   const ctxReturn = useQuoteFormContext()
   if (ctxReturn === null) return <></>
-  const { useQuoteForm } = ctxReturn
+  const { useQuoteForm, mealsRequested } = ctxReturn
   const {
     handleSubmit,
     register,
@@ -27,7 +26,7 @@ export default function GetQuoteForm() {
   const serviceModelValue = watch('serviceModel')
 
   const quoteFormSubmit = (data: QuoteFormData) => {
-    console.log(data)
+    console.log('QuoteForm submitted.', { data })
   }
   return (
     <section id="quoteForm" className="mx-auto mb-14 max-w-screen-lg pt-12">
@@ -44,7 +43,7 @@ export default function GetQuoteForm() {
         </CustomLink>
       </div>
 
-      <form onSubmit={handleSubmit(quoteFormSubmit)} noValidate>
+      <form id="mainForm" onSubmit={handleSubmit(quoteFormSubmit)} noValidate>
         <div className="grid grid-cols-2 gap-3 gap-x-6">
           <Input.Root errorMessage={errors.name}>
             <Input.Input<QuoteFormData> inputName="name" register={register} />
@@ -124,71 +123,84 @@ export default function GetQuoteForm() {
             options={SERVICES}
           />
         </div>
-
-        <MealRequest.Root className="mb-6">
-          <MealRequest.Title>Refeições Solicitadas:</MealRequest.Title>
-          {MEALS.length === 0 ? (
-            <MealRequest.EmptyState />
-          ) : (
-            <MealRequest.Table>
-              <MealRequest.TableHeader>
-                <MealRequest.HeaderCell className="w-36">
-                  Tipo de Refeição
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="w-[5.25rem]">
-                  Horário
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="w-[5.25rem]">
-                  Seg. à Sex.
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="w-[5.25rem]">
-                  Sábado
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="w-[5.25rem]">
-                  Domingo
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="max-w-md flex-1">
-                  Composição
-                </MealRequest.HeaderCell>
-              </MealRequest.TableHeader>
-              {MEALS.map((meal) => (
-                <MealRequest.TableRow key={meal.id}>
-                  <MealRequest.RowContent>
-                    <MealRequest.RowContentCell className="w-36">
-                      {meal.type}
-                    </MealRequest.RowContentCell>
-                    <MealRequest.RowContentCell className="w-[5.25rem]">
-                      {meal.timeToServe}
-                    </MealRequest.RowContentCell>
-                    <MealRequest.RowContentCell className="w-[5.25rem]">
-                      {meal.quantities.weekdays}
-                    </MealRequest.RowContentCell>
-                    <MealRequest.RowContentCell className="w-[5.25rem]">
-                      {meal.quantities.onSaturdays}
-                    </MealRequest.RowContentCell>
-                    <MealRequest.RowContentCell className="w-[5.25rem]">
-                      {meal.quantities.onSundays}
-                    </MealRequest.RowContentCell>
-                    <MealRequest.RowContentCell className="flex-1 truncate px-2">
-                      {meal.mealDescription}
-                    </MealRequest.RowContentCell>
-                  </MealRequest.RowContent>
-                  <MealRequest.RowEditButton meal={meal} />
-                </MealRequest.TableRow>
-              ))}
-            </MealRequest.Table>
-          )}
-        </MealRequest.Root>
-        <Button
-          type="submit"
-          variant="stroke"
-          className=" left-1/2 w-full max-w-sm -translate-x-1/2"
-        >
-          Enviar Solicitação de Orçamento
-          <Send size={16} strokeWidth={2.5} fillOpacity={0} />
-        </Button>
       </form>
-      <MealRequestDialog
+
+      <MealRequest.Root className="mb-6">
+        <MealRequest.Title>Refeições Solicitadas:</MealRequest.Title>
+        {mealsRequested.length === 0 ? (
+          <MealRequest.EmptyState />
+        ) : (
+          <MealRequest.Table>
+            <MealRequest.TableHeader>
+              <MealRequest.HeaderCell className="w-36">
+                Tipo de Refeição
+              </MealRequest.HeaderCell>
+              <MealRequest.HeaderCell className="w-[5.25rem]">
+                Horário
+              </MealRequest.HeaderCell>
+              <MealRequest.HeaderCell className="w-[5.25rem]">
+                Seg. à Sex.
+              </MealRequest.HeaderCell>
+              <MealRequest.HeaderCell className="w-[5.25rem]">
+                Sábado
+              </MealRequest.HeaderCell>
+              <MealRequest.HeaderCell className="w-[5.25rem]">
+                Domingo
+              </MealRequest.HeaderCell>
+              <MealRequest.HeaderCell className="max-w-md flex-1">
+                Composição
+              </MealRequest.HeaderCell>
+            </MealRequest.TableHeader>
+            {mealsRequested.map((meal) => (
+              <MealRequest.TableRow key={meal.id}>
+                <MealRequest.RowContent>
+                  <MealRequest.RowContentCell className="w-36">
+                    {meal.mealType}
+                  </MealRequest.RowContentCell>
+                  <MealRequest.RowContentCell className="w-[5.25rem]">
+                    {meal.mealTime}
+                  </MealRequest.RowContentCell>
+                  <MealRequest.RowContentCell className="w-[5.25rem]">
+                    {meal.weekDaysQuantities}
+                  </MealRequest.RowContentCell>
+                  <MealRequest.RowContentCell className="w-[5.25rem]">
+                    {meal.saturdayQuantities}
+                  </MealRequest.RowContentCell>
+                  <MealRequest.RowContentCell className="w-[5.25rem]">
+                    {meal.sundaysQuantities}
+                  </MealRequest.RowContentCell>
+                  <MealRequest.RowContentCell className="flex-1 truncate px-2">
+                    {meal.mealDescription}
+                  </MealRequest.RowContentCell>
+                </MealRequest.RowContent>
+                <MealRequest.RowEditButton meal={meal} />
+              </MealRequest.TableRow>
+            ))}
+          </MealRequest.Table>
+        )}
+        <MealRequestDialog
+          meal={null}
+          customClassName={{
+            before: 'left-1/2 mt-4 -translate-x-1/2',
+            className: 'h-9 px-4',
+          }}
+        >
+          Adicionar Refeição
+          <Soup size={16} strokeWidth={2} fillOpacity={0} />
+        </MealRequestDialog>
+      </MealRequest.Root>
+
+      <Button
+        type="submit"
+        form="mainForm"
+        variant="stroke"
+        className=" left-1/2 w-full max-w-sm -translate-x-1/2"
+      >
+        Enviar Solicitação de Orçamento
+        <Send size={16} strokeWidth={2.5} fillOpacity={0} />
+      </Button>
+
+      {/* <MealRequestDialog
         meal={null}
         customClassName={{
           before: '-top-32 left-1/2 mt-4 -translate-x-1/2',
@@ -197,7 +209,7 @@ export default function GetQuoteForm() {
       >
         Adicionar Refeição
         <Soup size={16} strokeWidth={2} fillOpacity={0} />
-      </MealRequestDialog>
+      </MealRequestDialog> */}
     </section>
   )
 }

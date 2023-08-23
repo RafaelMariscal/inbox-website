@@ -1,9 +1,9 @@
 import { FileEdit } from 'lucide-react'
 import MealRequestDialog from '../MealRequestDialog'
-import { MealsProps } from '@/@types/MealTypes'
+import { MealRequestedType } from '@/contexts/QuoteFormContext/porvider'
 
 type MealsRequestTableRowEditButtonProps = {
-  meal: MealsProps
+  meal: MealRequestedType
 }
 
 export default function MealsRequestTableRowEditButton({

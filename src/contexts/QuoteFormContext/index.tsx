@@ -1,11 +1,13 @@
 'use client'
 
-import { createContext } from 'react'
+import { Dispatch, SetStateAction, createContext } from 'react'
 import { UseFormReturn } from 'react-hook-form'
-import { QuoteFormData } from './porvider'
+import { MealRequestedType, QuoteFormData } from './porvider'
 
 interface QuoteFormContextProps {
   useQuoteForm: UseFormReturn<QuoteFormData>
+  mealsRequested: MealRequestedType[]
+  setMealsRequested: Dispatch<SetStateAction<MealRequestedType[]>>
 }
 
 export const QuoteFormContext = createContext<QuoteFormContextProps | null>(

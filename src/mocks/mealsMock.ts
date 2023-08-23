@@ -1,9 +1,9 @@
-import { MealsProps, MealsTypes } from '@/@types/MealTypes'
+import { MealsProps, MealTypeEnum } from '@/@types/MealTypes'
 
 const MEALS: MealsProps[] = [
   {
-    id: `${MealsTypes.breakfast}1`,
-    type: MealsTypes.breakfast,
+    id: `${MealTypeEnum.breakfast}1`,
+    type: MealTypeEnum.breakfast,
     timeToServe: '06:30',
     quantities: {
       weekdays: 230,
@@ -13,8 +13,8 @@ const MEALS: MealsProps[] = [
     mealDescription: '1 Pão com margarina, 1 Pão com recheio, café e leite.',
   },
   {
-    id: `${MealsTypes.lunch}1`,
-    type: MealsTypes.lunch,
+    id: `${MealTypeEnum.lunch}1`,
+    type: MealTypeEnum.lunch,
     timeToServe: '11:00',
     quantities: {
       weekdays: 290,
@@ -25,8 +25,8 @@ const MEALS: MealsProps[] = [
       'Arroz, Feijão, Macarrão, Farofa, 2 opções de Saladas, 2 opões de proteínas e doce ou fruta.',
   },
   {
-    id: `${MealsTypes.dinner}1`,
-    type: MealsTypes.dinner,
+    id: `${MealTypeEnum.dinner}1`,
+    type: MealTypeEnum.dinner,
     timeToServe: '11:00',
     quantities: {
       weekdays: 200,
@@ -37,8 +37,8 @@ const MEALS: MealsProps[] = [
       'Arroz, Feijão, Macarrão, Farofa, 2 opções de Saladas, 2 opões de proteínas e doce ou fruta.',
   },
   {
-    id: `${MealsTypes.dinner}2`,
-    type: MealsTypes.dinner,
+    id: `${MealTypeEnum.dinner}2`,
+    type: MealTypeEnum.dinner,
     timeToServe: '12:00',
     quantities: {
       weekdays: 200,

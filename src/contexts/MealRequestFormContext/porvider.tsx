@@ -7,11 +7,22 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
 export const mealRequestFormSchema = z.object({
-  mealType: z
-    .string({ required_error: 'Campo obrigatório.' })
-    .nonempty({ message: 'Campo obrigatório.' })
-    .min(3, { message: 'Mínimo de 3 caracteres.' })
-    .max(200, { message: 'Máximo de 200 caracteres.' }),
+  mealType: z.enum(
+    [
+      'Desjejum',
+      'Almoço',
+      'Jantar',
+      'Ceia',
+      'Lanche',
+      'Coffee Break',
+      'Outros',
+    ],
+    {
+      errorMap: () => {
+        return { message: 'Campo obrigatório.' }
+      },
+    },
+  ),
   mealTime: z
     .string({ required_error: 'Campo obrigatório.' })
     .nonempty({ message: 'Campo obrigatório.' })

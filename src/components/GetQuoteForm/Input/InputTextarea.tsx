@@ -19,6 +19,7 @@ export default function InputTextarea<T>({
       className={twMerge(
         'absolute inset-0 z-10 mt-5 bg-transparent px-4 outline-none',
         'resize-none text-ellipsis whitespace-normal font-semibold',
+        'disabled:bg-red-500',
         '[&_~*]:valid:top-[.125rem] [&_~*]:focus:top-[.125rem]',
         '[&_~*]:valid:text-[.625rem] [&_~*]:focus:text-[.625rem]',
         '[&_~*]:valid:opacity-100 [&_~*]:focus:opacity-100',

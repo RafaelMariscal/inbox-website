@@ -1,13 +1,5 @@
-import { MealsProps } from '@/@types/MealTypes'
 import * as Dialog from '@radix-ui/react-dialog'
-import {
-  Delete,
-  ListMinus,
-  ListPlus,
-  ListX,
-  RemoveFormattingIcon,
-  X,
-} from 'lucide-react'
+import { ClipboardCheck, Delete, ListPlus, Loader2, X } from 'lucide-react'
 import { ComponentProps, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Input from '../Input'
@@ -17,6 +9,9 @@ import { MealRequestFormData } from '@/contexts/MealRequestFormContext/porvider'
 import MEAL_TYPE_OPTIONS from '@/mocks/mealTypeMocks'
 import MEAL_TIME_OPTIONS from '@/mocks/mealTimeOptionMock'
 import clsx from 'clsx'
+import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
+import { MealRequestedType } from '@/contexts/QuoteFormContext/porvider'
+import { UUID } from 'crypto'
 
 interface CustomClassNameProps {
   before?: string
@@ -25,7 +20,7 @@ interface CustomClassNameProps {
 
 type MealRequestDialogProps = ComponentProps<'div'> & {
   customClassName?: CustomClassNameProps
-  meal: MealsProps | null
+  meal: MealRequestedType | null
 }
 
 export default function MealRequestDialog({
@@ -35,19 +30,21 @@ export default function MealRequestDialog({
   customClassName,
 }: MealRequestDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
-
+  const [isLoading, setIsLoading] = useState(false)
+  const quoteCtxReturn = useQuoteFormContext()
   const ctxReturn = useMealRequestFormContext()
-  if (ctxReturn === null) return <></>
+  if (quoteCtxReturn === null || ctxReturn === null) return <></>
+  const { useQuoteForm, setMealsRequested } = quoteCtxReturn
   const { MealRequestForm } = ctxReturn
+  const { setValue: quoteFormSetValue } = useQuoteForm
   const {
     handleSubmit,
     register,
     watch,
     setValue,
     reset,
-    formState: { errors },
+    formState: { isSubmitSuccessful, errors },
   } = MealRequestForm
-
   const mealTypeValue = watch('mealType')
   const mealTimeValue = watch('mealTime')
   const mealDescriptionValue = watch('mealDescription')
@@ -55,24 +52,76 @@ export default function MealRequestDialog({
   const FieldTextMaxChars = 400
   const CharCouterValue = FieldTextMaxChars - mealDescriptionTotalChars
 
+  const addMealRequest = (data: MealRequestFormData) => {
+    setTimeout(() => {
+      const id = window.crypto.randomUUID() as UUID
+      const newMealRequest: MealRequestedType = { id, ...data }
+      setMealsRequested((prev) => {
+        quoteFormSetValue('mealsRequest', [...prev, newMealRequest])
+        return [...prev, newMealRequest]
+      })
+      setIsLoading(false)
+    }, 1000)
+  }
+  const editMealRequest = (
+    data: MealRequestFormData,
+    meal: MealRequestedType,
+  ) => {
+    setTimeout(() => {
+      setMealsRequested((prev) => {
+        const updatedRequests = prev.map((request) => {
+          if (request.id === meal.id)
+            return { id: request.id, ...data } as MealRequestedType
+          return request
+        })
+        quoteFormSetValue('mealsRequest', updatedRequests)
+        return updatedRequests
+      })
+      setIsLoading(false)
+    }, 1000)
+  }
+  const deleteMealRequest = (meal: MealRequestedType) => {
+    setTimeout(() => {
+      setMealsRequested((prev) => {
+        const updatedRequests = prev.filter((request) => request.id !== meal.id)
+        quoteFormSetValue('mealsRequest', updatedRequests)
+        return updatedRequests
+      })
+      setIsLoading(false)
+    }, 1000)
+  }
+
   const handleMealRequestDialogSubmit = (data: MealRequestFormData) => {
-    console.log('MealRequestDialogForm Submitted', { data })
+    console.log('MealRequestDialogForm submitted', { data })
+    setIsLoading(true)
+    if (meal) {
+      editMealRequest(data, meal)
+      handleCloseModal()
+    } else {
+      addMealRequest(data)
+      handleCloseModal()
+    }
   }
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open)
     if (meal) {
-      setValue('mealType', meal.type)
-      setValue('mealTime', meal.timeToServe)
-      setValue('weekDaysQuantities', meal.quantities.weekdays)
-      setValue('saturdayQuantities', meal.quantities.onSaturdays)
-      setValue('sundaysQuantities', meal.quantities.onSundays)
+      setValue('mealType', meal.mealType)
+      setValue('mealTime', meal.mealTime)
+      setValue('weekDaysQuantities', meal.weekDaysQuantities)
+      setValue('saturdayQuantities', meal.saturdayQuantities)
+      setValue('sundaysQuantities', meal.sundaysQuantities)
       setValue('mealDescription', meal.mealDescription)
     } else {
       reset()
     }
   }
-
+  const handleCloseModal = () => {
+    setTimeout(() => {
+      setIsOpen(false)
+      reset()
+    }, 300)
+  }
   return (
     <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
       <Dialog.Trigger
@@ -124,7 +173,7 @@ export default function MealRequestDialog({
             <header className="mb-1 flex items-center justify-between">
               <Dialog.Title className="font-semibold leading-tight tracking-wide">
                 {meal
-                  ? `Editar Refeição: ${meal.type}`
+                  ? `Editar Refeição: ${meal.mealType}`
                   : 'Adicionar nova Refeição'}
               </Dialog.Title>
               <Dialog.Close
@@ -143,120 +192,151 @@ export default function MealRequestDialog({
             </Dialog.Description>
 
             <form
+              id="mealRequestForm"
               className="mt-3"
               onSubmit={handleSubmit(handleMealRequestDialogSubmit)}
               noValidate
             >
-              <div className="mb-2 grid grid-cols-3 grid-rows-2 gap-2">
-                <Input.Select<MealRequestFormData>
-                  name="mealType"
-                  placeholder="Tipo de Refeição"
-                  value={mealTypeValue}
-                  setValue={setValue}
-                  errorMessage={errors?.mealType?.message}
-                  options={MEAL_TYPE_OPTIONS}
-                  className="col-span-2"
-                />
-                <Input.Select
-                  name="mealTime"
-                  placeholder="Horário"
-                  value={mealTimeValue}
-                  setValue={setValue}
-                  errorMessage={errors?.mealTime?.message}
-                  options={MEAL_TIME_OPTIONS}
-                  className=""
-                />
-                <Input.Root errorMessage={errors?.weekDaysQuantities}>
-                  <Input.Input<MealRequestFormData>
-                    inputName="weekDaysQuantities"
+              <fieldset disabled={isSubmitSuccessful}>
+                <div className="mb-2 grid grid-cols-3 grid-rows-2 gap-2">
+                  <Input.Select<MealRequestFormData>
+                    name="mealType"
+                    placeholder="Tipo de Refeição"
+                    value={mealTypeValue}
+                    setValue={setValue}
+                    errorMessage={errors?.mealType?.message}
+                    options={MEAL_TYPE_OPTIONS}
+                    className="col-span-2"
+                    disabled={isSubmitSuccessful}
+                  />
+                  <Input.Select
+                    name="mealTime"
+                    placeholder="Horário"
+                    value={mealTimeValue}
+                    setValue={setValue}
+                    errorMessage={errors?.mealTime?.message}
+                    options={MEAL_TIME_OPTIONS}
+                    className=""
+                    disabled={isSubmitSuccessful}
+                  />
+                  <Input.Root errorMessage={errors?.weekDaysQuantities}>
+                    <Input.Input<MealRequestFormData>
+                      inputName="weekDaysQuantities"
+                      register={register}
+                      type="number"
+                    />
+                    <Input.Container>
+                      <Input.Label>Qtd. seg. à sex.</Input.Label>
+                    </Input.Container>
+                    {errors?.weekDaysQuantities && (
+                      <Input.ErrorMessage
+                        errorMessage={errors?.weekDaysQuantities.message}
+                      />
+                    )}
+                  </Input.Root>
+                  <Input.Root errorMessage={errors?.saturdayQuantities}>
+                    <Input.Input<MealRequestFormData>
+                      inputName="saturdayQuantities"
+                      register={register}
+                      type="number"
+                    />
+                    <Input.Container>
+                      <Input.Label>Qtd. sábado</Input.Label>
+                    </Input.Container>
+                    {errors?.saturdayQuantities && (
+                      <Input.ErrorMessage
+                        errorMessage={errors?.saturdayQuantities.message}
+                      />
+                    )}
+                  </Input.Root>
+                  <Input.Root errorMessage={errors?.sundaysQuantities}>
+                    <Input.Input<MealRequestFormData>
+                      inputName="sundaysQuantities"
+                      register={register}
+                      type="number"
+                    />
+                    <Input.Container>
+                      <Input.Label>Qtd. domingo</Input.Label>
+                    </Input.Container>
+                    {errors?.sundaysQuantities && (
+                      <Input.ErrorMessage
+                        errorMessage={errors?.sundaysQuantities.message}
+                      />
+                    )}
+                  </Input.Root>
+                </div>
+                <Input.Root
+                  className="h-40"
+                  errorMessage={errors?.mealDescription}
+                >
+                  <Input.Textarea<MealRequestFormData>
+                    inputName="mealDescription"
                     register={register}
-                    type="number"
+                    className="align-baseline"
+                    maxLength={FieldTextMaxChars}
                   />
                   <Input.Container>
-                    <Input.Label>Qtd. seg. à sex.</Input.Label>
+                    <Input.Label>Composição da refeição</Input.Label>
                   </Input.Container>
-                  {errors?.weekDaysQuantities && (
+                  {errors?.mealDescription && (
                     <Input.ErrorMessage
-                      errorMessage={errors?.weekDaysQuantities.message}
+                      errorMessage={errors?.mealDescription.message}
                     />
                   )}
                 </Input.Root>
-                <Input.Root errorMessage={errors?.saturdayQuantities}>
-                  <Input.Input<MealRequestFormData>
-                    inputName="saturdayQuantities"
-                    register={register}
-                    type="number"
-                  />
-                  <Input.Container>
-                    <Input.Label>Qtd. sábado</Input.Label>
-                  </Input.Container>
-                  {errors?.saturdayQuantities && (
-                    <Input.ErrorMessage
-                      errorMessage={errors?.saturdayQuantities.message}
-                    />
+                <Input.CharCounter
+                  className={twMerge(
+                    'mt-1 text-end opacity-60',
+                    clsx(CharCouterValue === 0 && 'text-terracotta-500'),
                   )}
-                </Input.Root>
-                <Input.Root errorMessage={errors?.sundaysQuantities}>
-                  <Input.Input<MealRequestFormData>
-                    inputName="sundaysQuantities"
-                    register={register}
-                    type="number"
-                  />
-                  <Input.Container>
-                    <Input.Label>Qtd. domingo</Input.Label>
-                  </Input.Container>
-                  {errors?.sundaysQuantities && (
-                    <Input.ErrorMessage
-                      errorMessage={errors?.sundaysQuantities.message}
-                    />
-                  )}
-                </Input.Root>
-              </div>
-              <Input.Root
-                className="h-40"
-                errorMessage={errors?.mealDescription}
-              >
-                <Input.Textarea<MealRequestFormData>
-                  inputName="mealDescription"
-                  register={register}
-                  className="align-baseline"
-                  maxLength={FieldTextMaxChars}
-                />
-                <Input.Container>
-                  <Input.Label>Composição da refeição</Input.Label>
-                </Input.Container>
-                {errors?.mealDescription && (
-                  <Input.ErrorMessage
-                    errorMessage={errors?.mealDescription.message}
-                  />
-                )}
-              </Input.Root>
-              <Input.CharCounter
-                className={twMerge(
-                  'mt-1 text-end opacity-60',
-                  clsx(CharCouterValue === 0 && 'text-terracotta-500'),
-                )}
-              >
-                {CharCouterValue === 0
-                  ? 'Máximo de caractéres atingido.'
-                  : `Restam ${CharCouterValue} caracteres.`}
-              </Input.CharCounter>
-              <div className="flex gap-4">
-                {meal ? (
+                >
+                  {CharCouterValue === 0
+                    ? 'Máximo de caractéres atingido.'
+                    : `Restam ${CharCouterValue} caracteres.`}
+                </Input.CharCounter>
+                <div className="flex gap-4">
+                  {meal ? (
+                    <Button
+                      type="button"
+                      variant="danger"
+                      className="mt-4 w-max whitespace-nowrap"
+                      onClick={() => deleteMealRequest(meal)}
+                    >
+                      Excluir Refeição
+                      <Delete size={18} strokeWidth={2} fillOpacity={0} />
+                    </Button>
+                  ) : null}
                   <Button
-                    type="button"
-                    variant="danger"
-                    className="mt-4 w-max whitespace-nowrap"
+                    type="submit"
+                    form="mealRequestForm"
+                    variant="stroke"
+                    className="mt-4 w-full"
                   >
-                    Excluir Refeição
-                    <Delete size={18} strokeWidth={2} fillOpacity={0} />
+                    {isLoading && (
+                      <Loader2
+                        size={18}
+                        strokeWidth={2}
+                        fillOpacity={0}
+                        className="animate-[spin_1000ms_infinite_linear]"
+                      />
+                    )}
+                    {!isLoading && isSubmitSuccessful && (
+                      <ClipboardCheck
+                        size={18}
+                        strokeWidth={2}
+                        fillOpacity={0}
+                        className="anim animate-[show_500ms]"
+                      />
+                    )}
+                    {!isLoading && !isSubmitSuccessful && (
+                      <>
+                        {meal ? ' Confirmar Edição' : 'Adicionar à Solicitação'}
+                        <ListPlus size={18} strokeWidth={2} fillOpacity={0} />
+                      </>
+                    )}
                   </Button>
-                ) : null}
-                <Button type="submit" variant="stroke" className="mt-4 w-full">
-                  {meal ? ' Confirmar Edição' : 'Adicionar à Solicitação'}
-                  <ListPlus size={18} strokeWidth={2} fillOpacity={0} />
-                </Button>
-              </div>
+                </div>
+              </fieldset>
             </form>
           </Dialog.Content>
         </Dialog.Overlay>
