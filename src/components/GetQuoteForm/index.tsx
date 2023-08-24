@@ -8,12 +8,14 @@ import MealRequest from './MealsRequest'
 import CustomLink from '../CustomLink'
 import Button from '../Button'
 import MealRequestDialog from './MealRequestDialog'
-import { Send, Soup } from 'lucide-react'
+import { ClipboardCheck, Loader2, Send, Soup } from 'lucide-react'
 import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
 import clsx from 'clsx'
+import { useState } from 'react'
 
 export default function GetQuoteForm() {
+  const [isLoading, setIsLoading] = useState(false)
   const ctxReturn = useQuoteFormContext()
   if (ctxReturn === null) return <></>
   const { useQuoteForm, mealsRequested } = ctxReturn
@@ -22,12 +24,20 @@ export default function GetQuoteForm() {
     register,
     watch,
     setValue,
-    formState: { errors },
+    formState: { isSubmitSuccessful, errors },
   } = useQuoteForm
   const serviceModelValue = watch('serviceModel')
 
+  const sendQuoteRequest = () => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+  }
+
   const quoteFormSubmit = (data: QuoteFormData) => {
+    setIsLoading(true)
     console.log('QuoteForm submitted.', { data })
+    sendQuoteRequest()
   }
   return (
     <section id="quoteForm" className="mx-auto mb-14 max-w-screen-lg pt-12">
@@ -47,7 +57,11 @@ export default function GetQuoteForm() {
       <form id="mainForm" onSubmit={handleSubmit(quoteFormSubmit)} noValidate>
         <div className="grid grid-cols-2 gap-3 gap-x-6">
           <Input.Root errorMessage={errors.name}>
-            <Input.Input<QuoteFormData> inputName="name" register={register} />
+            <Input.Input<QuoteFormData>
+              inputName="name"
+              register={register}
+              readOnly={isLoading || isSubmitSuccessful}
+            />
             <Input.Container>
               <Input.Label>Nome</Input.Label>
             </Input.Container>
@@ -56,7 +70,11 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.role}>
-            <Input.Input<QuoteFormData> inputName="role" register={register} />
+            <Input.Input<QuoteFormData>
+              inputName="role"
+              register={register}
+              readOnly={isLoading || isSubmitSuccessful}
+            />
             <Input.Container>
               <Input.Label>Cargo</Input.Label>
             </Input.Container>
@@ -65,7 +83,11 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.email}>
-            <Input.Input<QuoteFormData> inputName="email" register={register} />
+            <Input.Input<QuoteFormData>
+              inputName="email"
+              register={register}
+              readOnly={isLoading || isSubmitSuccessful}
+            />
             <Input.Container>
               <Input.Label>Email</Input.Label>
             </Input.Container>
@@ -74,7 +96,11 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.phone}>
-            <Input.Input<QuoteFormData> inputName="phone" register={register} />
+            <Input.Input<QuoteFormData>
+              inputName="phone"
+              register={register}
+              readOnly={isLoading || isSubmitSuccessful}
+            />
             <Input.Container>
               <Input.Label>Telefone</Input.Label>
             </Input.Container>
@@ -86,6 +112,7 @@ export default function GetQuoteForm() {
             <Input.Input<QuoteFormData>
               inputName="companyName"
               register={register}
+              readOnly={isLoading || isSubmitSuccessful}
             />
             <Input.Container>
               <Input.Label>Nome da Empresa</Input.Label>
@@ -95,7 +122,11 @@ export default function GetQuoteForm() {
             )}
           </Input.Root>
           <Input.Root errorMessage={errors.cnpj}>
-            <Input.Input<QuoteFormData> inputName="cnpj" register={register} />
+            <Input.Input<QuoteFormData>
+              inputName="cnpj"
+              register={register}
+              readOnly={isLoading || isSubmitSuccessful}
+            />
             <Input.Container>
               <Input.Label>CNPJ</Input.Label>
             </Input.Container>
@@ -107,6 +138,7 @@ export default function GetQuoteForm() {
             <Input.Input<QuoteFormData>
               inputName="address"
               register={register}
+              readOnly={isLoading || isSubmitSuccessful}
             />
             <Input.Container>
               <Input.Label>Endereço</Input.Label>
@@ -122,6 +154,7 @@ export default function GetQuoteForm() {
             setValue={setValue}
             errorMessage={errors?.serviceModel?.message}
             options={SERVICES}
+            disabled={isLoading || isSubmitSuccessful}
           />
         </div>
       </form>
@@ -182,7 +215,10 @@ export default function GetQuoteForm() {
                     {meal.mealDescription}
                   </MealRequest.RowContentCell>
                 </MealRequest.RowContent>
-                <MealRequest.RowEditButton meal={meal} />
+                <MealRequest.RowEditButton
+                  meal={meal}
+                  disabled={isLoading || isSubmitSuccessful}
+                />
               </MealRequest.TableRow>
             ))}
           </MealRequest.Table>
@@ -193,6 +229,7 @@ export default function GetQuoteForm() {
             before: 'left-1/2 mt-4 -translate-x-1/2',
             className: 'h-9 px-4',
           }}
+          disabled={isLoading || isSubmitSuccessful}
         >
           Adicionar Refeição
           <Soup size={16} strokeWidth={2} fillOpacity={0} />
@@ -203,10 +240,31 @@ export default function GetQuoteForm() {
         type="submit"
         form="mainForm"
         variant="stroke"
-        className=" left-1/2 w-full max-w-sm -translate-x-1/2"
+        className=" left-1/2 w-full max-w-sm -translate-x-1/2 disabled:pointer-events-none"
+        disabled={isLoading || isSubmitSuccessful}
       >
-        Enviar Solicitação de Orçamento
-        <Send size={16} strokeWidth={2.5} fillOpacity={0} />
+        {isLoading && (
+          <Loader2
+            size={18}
+            strokeWidth={2}
+            fillOpacity={0}
+            className="animate-[spin_1000ms_infinite_linear]"
+          />
+        )}
+        {!isLoading && isSubmitSuccessful && (
+          <ClipboardCheck
+            size={18}
+            strokeWidth={2}
+            fillOpacity={0}
+            className="anim animate-[show_500ms]"
+          />
+        )}
+        {!isLoading && !isSubmitSuccessful && (
+          <>
+            Enviar Solicitação de Orçamento
+            <Send size={16} strokeWidth={2.5} fillOpacity={0} />
+          </>
+        )}
       </Button>
     </section>
   )
