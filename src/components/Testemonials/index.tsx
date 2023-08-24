@@ -6,8 +6,9 @@ import LeilaSrc from '@/assets/images/testemonialsImages/leilaRodrigues.png'
 import ErlandiaSrc from '@/assets/images/testemonialsImages/erlandiaDiasRocha.png'
 import ArthurSrc from '@/assets/images/testemonialsImages/arthurMoreira.png'
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
-import { StaticImageData } from 'next/image'
 import { useEffect, useState } from 'react'
+import Image, { StaticImageData } from 'next/image'
+import TestemonialsBgSrc from '@/assets/images/testemonialsBg.png'
 export interface Testemonial {
   id: string
   avatar: StaticImageData
@@ -53,12 +54,12 @@ const TESTEMONIALS: Testemonial[] = [
 
 export default function Testemonials() {
   const [testemonials, setTestemonials] = useState(TESTEMONIALS)
-  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   useEffect(() => {
-    if (!isTransitioning) setIsTransitioning(true)
+    if (!isAnimating) setIsAnimating(true)
     setTimeout(() => {
-      setIsTransitioning(false)
+      setIsAnimating(false)
     }, 500)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testemonials])
@@ -76,11 +77,16 @@ export default function Testemonials() {
 
   return (
     <section id="testemonials" className="relative flex overflow-hidden">
-      <div className="flex w-1/2 justify-end pr-32">
+      <div className="flex w-full max-w-[50%] justify-end pr-32">
         <Quote size={220} strokeWidth={2} color="transparent" fill="#ebf6f3" />
       </div>
-      <div className="h-[600px] flex-1 bg-testemonials bg-auto bg-repeat-x" />
-
+      <Image
+        src={TestemonialsBgSrc}
+        alt="Green squares blob image"
+        quality={100}
+        className="h-[600px] w-full max-w-[50%] bg-repeat-x object-cover object-left"
+        placeholder="blur"
+      />
       <Testemonial.Root>
         <Testemonial.Controller>
           <Testemonial.ControllerTitle>
@@ -89,14 +95,14 @@ export default function Testemonials() {
           <div>
             <Testemonial.ControllerButton
               onClick={pastOne}
-              disabled={isTransitioning}
+              disabled={isAnimating}
               className="mr-4"
             >
               <ChevronLeft size={24} className="drop-shadow-custom-text" />
             </Testemonial.ControllerButton>
             <Testemonial.ControllerButton
               onClick={nextOne}
-              disabled={isTransitioning}
+              disabled={isAnimating}
             >
               <ChevronRight size={24} className="drop-shadow-custom-text" />
             </Testemonial.ControllerButton>

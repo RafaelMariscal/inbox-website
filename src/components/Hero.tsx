@@ -17,12 +17,13 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex h-[90vh] flex-col items-center justify-center gap-12"
+      className="relative flex h-[90vh] min-h-[600px] flex-col items-center justify-center gap-12"
     >
       <Image
         src={HeroBgSrc}
         alt="Restaurant Image"
-        className="absolute h-[90vh] w-full object-cover"
+        quality={100}
+        className="absolute h-[90vh] min-h-[600px] w-full object-cover"
         placeholder="blur"
         priority
       />
