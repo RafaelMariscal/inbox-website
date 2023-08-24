@@ -50,13 +50,13 @@ export default function GetQuoteForm() {
         Solicitar Orçamento
       </SectionTitle>
       <div className="mb-6 flex items-center justify-center gap-4">
-        <p className="font-medium">
+        {/* <p className="font-medium">
           Ou fale diretamente com um de nossos atendentes:
         </p>
         <CustomLink variant="stroke" href="">
           Whatsapp
           <WhatsappLogo className="[&_*]:fill-eden-100" />
-        </CustomLink>
+        </CustomLink> */}
       </div>
 
       <form id="mainForm" onSubmit={handleSubmit(quoteFormSubmit)} noValidate>

@@ -43,10 +43,10 @@ export default function Hero() {
           Solicitar Orçamento
           <Soup size={18} strokeWidth={2} fillOpacity={0} />
         </CustomLink>
-        <CustomLink variant="stroke" href="" className="w-full">
+        {/* <CustomLink variant="stroke" href="" className="w-full">
           Whatsapp
           <WhatsappLogo className="[&_*]:fill-eden-100" />
-        </CustomLink>
+        </CustomLink> */}
       </div>
     </section>
   )
