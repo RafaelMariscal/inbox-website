@@ -97,7 +97,7 @@ export default function MealRequestDialog({
         disabled={disabled}
         className={twMerge(
           'relative inline-block bg-salen-500 shadow-button outline-none',
-          'disabled:pointer-events-none',
+          'select-none disabled:pointer-events-none',
           'before:block before:h-2 before:w-2 before:bg-inherit',
           'before:absolute before:left-0 before:top-0 ',
           'before:origin-top-left before:-rotate-45 before:scale-0',
