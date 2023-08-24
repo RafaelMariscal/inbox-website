@@ -6,6 +6,7 @@ import WhatsappLogo from '@/assets/icons/WhatsappLogo'
 import CustomLink from './CustomLink'
 import Image from 'next/image'
 import HeroBgSrc from '@/assets/images/HeroBackground.png'
+import { Soup } from 'lucide-react'
 
 const breeSerif = Bree_Serif({
   weight: '400',
@@ -40,6 +41,7 @@ export default function Hero() {
       <div className="flex w-full max-w-screen-phones-sm flex-col gap-6">
         <CustomLink variant="light" href="#quoteForm" className="w-full">
           Solicitar Orçamento
+          <Soup size={18} strokeWidth={2} fillOpacity={0} />
         </CustomLink>
         <CustomLink variant="stroke" href="" className="w-full">
           Whatsapp

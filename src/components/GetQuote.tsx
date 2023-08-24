@@ -1,3 +1,4 @@
+import { Soup } from 'lucide-react'
 import CustomLink from './CustomLink'
 
 export default function GetQuote() {
@@ -13,6 +14,7 @@ export default function GetQuote() {
       </div>
       <CustomLink href="#quoteForm" variant="light">
         Solicitar Orçamento
+        <Soup size={18} strokeWidth={2} fillOpacity={0} />
       </CustomLink>
     </div>
   )
