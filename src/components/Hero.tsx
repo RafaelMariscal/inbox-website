@@ -4,6 +4,8 @@ import { twMerge } from 'tailwind-merge'
 import Brand from '@/assets/logo/Brand'
 import WhatsappLogo from '@/assets/icons/WhatsappLogo'
 import CustomLink from './CustomLink'
+import Image from 'next/image'
+import HeroBgSrc from '@/assets/images/HeroBackground.png'
 
 const breeSerif = Bree_Serif({
   weight: '400',
@@ -15,8 +17,15 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="flex h-[90vh] flex-col items-center justify-center gap-12 bg-hero bg-cover"
+      className="relative flex h-[90vh] flex-col items-center justify-center gap-12"
     >
+      <Image
+        src={HeroBgSrc}
+        alt="Restaurant Image"
+        className="absolute h-[90vh] w-full object-cover"
+        placeholder="blur"
+        priority
+      />
       <Brand className="drop-shadow-custom" />
       <h2
         className={twMerge(
