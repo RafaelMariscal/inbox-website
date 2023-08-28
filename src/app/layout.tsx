@@ -4,6 +4,7 @@ import Footer from '@/components/Footer'
 import { Roboto_Slab } from 'next/font/google'
 import type { Metadata } from 'next'
 import { GlobalGoogleReCaptchaProvider } from '@/contexts/GlobalGoogleReCaptchaProvider'
+import { GlobalToastContextProvider } from '@/contexts/ToastContext/provider'
 
 const robotoSlab = Roboto_Slab({
   subsets: ['latin'],
@@ -45,10 +46,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={robotoSlab.className}>
-        <GlobalGoogleReCaptchaProvider>
-          {children}
-        </GlobalGoogleReCaptchaProvider>
-        <Footer />
+        <GlobalToastContextProvider>
+          <GlobalGoogleReCaptchaProvider>
+            {children}
+          </GlobalGoogleReCaptchaProvider>
+          <Footer />
+        </GlobalToastContextProvider>
       </body>
     </html>
   )

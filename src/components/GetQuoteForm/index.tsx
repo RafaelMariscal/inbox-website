@@ -15,10 +15,12 @@ import { useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ClipboardCheck, ListPlus, Loader2, Send, Soup } from 'lucide-react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { useToastContext } from '@/contexts/ToastContext/hook'
 
 export default function GetQuoteForm() {
   const [isLoading, setIsLoading] = useState(false)
   const quoteFormContext = useQuoteFormContext()
+  const { setIsOpen, setTitle, setMessage } = useToastContext()
   const { executeRecaptcha } = useGoogleReCaptcha()
   const getReCaptchaVerifyToken = useCallback(async () => {
     if (!executeRecaptcha)
@@ -42,6 +44,9 @@ export default function GetQuoteForm() {
 
   const sendQuoteRequest = (data: QuoteFormData) => {
     setTimeout(() => {
+      setIsOpen(true)
+      setTitle('Solicitação enviada!')
+      setMessage('Logo nossa equipe entrará em contato.')
       console.log('Form data submitted.', { data })
       setIsLoading(false)
     }, 1000)

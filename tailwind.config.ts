@@ -139,6 +139,38 @@ const config: Config = {
             transform: 'translate(0%,50%)',
           },
         },
+        swipeIn: {
+          '0%': { right: '-50%', opacity: '0%', visibility: 'invisible' },
+          '100%': {
+            right: '1.5rem',
+            opacity: '100%',
+            visibility: 'visible',
+          },
+        },
+        swipeOut: {
+          '0%': {
+            right: '1.5rem',
+            opacity: '100%',
+            visibility: 'visible',
+          },
+          '100%': { right: '-50%', opacity: '0%', visibility: 'invisible' },
+        },
+        swipeUp: {
+          '0%': { bottom: '-50%', opacity: '0%', visibility: 'invisible' },
+          '100%': {
+            bottom: '1rem',
+            opacity: '100%',
+            visibility: 'visible',
+          },
+        },
+        swipeDown: {
+          '0%': {
+            bottom: '1rem',
+            opacity: '100%',
+            visibility: 'visible',
+          },
+          '100%': { bottom: '-50%', opacity: '0%', visibility: 'invisible' },
+        },
       },
     },
   },

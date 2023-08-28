@@ -14,6 +14,7 @@ export const GlobalGoogleReCaptchaProvider = ({
   return (
     <GoogleReCaptchaProvider
       reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+      language="pt-BR"
     >
       {children}
     </GoogleReCaptchaProvider>
