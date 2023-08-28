@@ -129,7 +129,8 @@ export default function MealRequestDialog({
       <Dialog.Portal>
         <Dialog.Overlay
           className="
-            fixed inset-0 z-10 grid place-items-center bg-dark/20
+            fixed inset-0 z-10 grid place-items-center 
+            bg-dark/20 backdrop-blur-sm
             data-[state=closed]:animate-[hide_300ms]
             data-[state=open]:animate-[show_200ms]
           "

@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className="scroll-smooth" lang="pt-BR">
+    <html lang="pt-BR">
       <body className={robotoSlab.className}>
         {children}
         <Footer />
