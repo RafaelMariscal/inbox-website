@@ -11,15 +11,25 @@ import MealRequestDialog from './MealRequestDialog'
 import clsx from 'clsx'
 import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ClipboardCheck, Loader2, Send, Soup } from 'lucide-react'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 export default function GetQuoteForm() {
   const [isLoading, setIsLoading] = useState(false)
-  const ctxReturn = useQuoteFormContext()
-  if (ctxReturn === null) return <></>
-  const { useQuoteForm, mealsRequested, setMealsRequested } = ctxReturn
+  const quoteFormContext = useQuoteFormContext()
+  const { executeRecaptcha } = useGoogleReCaptcha()
+  const getReCaptchaVerifyToken = useCallback(async () => {
+    if (!executeRecaptcha)
+      return console.log('Execute recaptcha not yet available')
+    const token = await executeRecaptcha()
+    console.log('Valid ReCaptcha token')
+    return token
+  }, [executeRecaptcha])
+
+  if (quoteFormContext === null) return <></>
+  const { useQuoteForm, mealsRequested, setMealsRequested } = quoteFormContext
   const {
     handleSubmit,
     register,
@@ -30,15 +40,18 @@ export default function GetQuoteForm() {
   } = useQuoteForm
   const serviceModelValue = watch('serviceModel')
 
-  const sendQuoteRequest = () => {
+  const sendQuoteRequest = (data: QuoteFormData) => {
     setTimeout(() => {
+      console.log('Form data submitted.', { data })
       setIsLoading(false)
     }, 1000)
   }
-  const quoteFormSubmit = (data: QuoteFormData) => {
+  const quoteFormSubmit = async (data: QuoteFormData) => {
     setIsLoading(true)
-    console.log('QuoteForm submitted.', { data })
-    sendQuoteRequest()
+    console.log('Valid form data. Awaiting Validation Token.', { data })
+    const ReCaptchaToken = await getReCaptchaVerifyToken()
+    if (ReCaptchaToken) return sendQuoteRequest(data)
+    return console.log('Failed to send Data')
   }
   const handleFormReset = () => {
     reset()
@@ -272,7 +285,7 @@ export default function GetQuoteForm() {
               size={18}
               strokeWidth={2}
               fillOpacity={0}
-              className="anim animate-[show_500ms]"
+              className="animate-[show_500ms]"
             />
           )}
           {!isLoading && !isSubmitSuccessful && (

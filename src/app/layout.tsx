@@ -3,6 +3,7 @@ import Footer from '@/components/Footer'
 // eslint-disable-next-line camelcase
 import { Roboto_Slab } from 'next/font/google'
 import type { Metadata } from 'next'
+import { GlobalGoogleReCaptchaProvider } from '@/contexts/GlobalGoogleReCaptchaProvider'
 
 const robotoSlab = Roboto_Slab({
   subsets: ['latin'],
@@ -16,20 +17,21 @@ export const metadata: Metadata = {
   abstract:
     'Fornecedor de Refeições Coletivas com soluções em Restaurantes Empresariais, Refeições Transportadas e Refeições para Eventos.',
   keywords: [
-    'Empresa',
-    'Fornecedor',
-    'Refeicoes',
-    'Refeições',
-    'Alimentacao',
-    'Alimentação',
-    'Coletivas',
-    'Restaurante',
-    'Refeitório',
-    'Refeitorio',
-    'Transportada',
-    'Eventos',
-    'Orçamento',
-    'Orcamento',
+    'inbox',
+    'refeições',
+    'refeicoes',
+    'coletivas',
+    'fornecedor',
+    'alimentacao',
+    'alimentação',
+    'empresa',
+    'restaurante',
+    'refeitório',
+    'refeitorio',
+    'transportada',
+    'eventos',
+    'orçamento',
+    'orcamento',
   ],
   robots: 'index, follow',
   authors: { name: 'RM Softwere', url: 'rafaelmariscal.vercel.app/' },
@@ -43,7 +45,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={robotoSlab.className}>
-        {children}
+        <GlobalGoogleReCaptchaProvider>
+          {children}
+        </GlobalGoogleReCaptchaProvider>
         <Footer />
       </body>
     </html>
