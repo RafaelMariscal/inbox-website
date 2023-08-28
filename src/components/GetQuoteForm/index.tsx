@@ -13,7 +13,7 @@ import { QuoteFormData } from '@/contexts/QuoteFormContext/porvider'
 import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
 import { useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ClipboardCheck, Loader2, Send, Soup } from 'lucide-react'
+import { ClipboardCheck, ListPlus, Loader2, Send, Soup } from 'lucide-react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 export default function GetQuoteForm() {
@@ -291,7 +291,7 @@ export default function GetQuoteForm() {
           {!isLoading && !isSubmitSuccessful && (
             <>
               Enviar Solicitação de Orçamento
-              <Send size={16} strokeWidth={2.5} fillOpacity={0} />
+              <Send size={16} strokeWidth={2} fillOpacity={0} />
             </>
           )}
         </Button>
@@ -301,13 +301,15 @@ export default function GetQuoteForm() {
               initial={{ opacity: '0%', translateY: '-10%' }}
               animate={{ opacity: '100%', translateY: '0%' }}
               exit={{ opacity: '0%', translateY: '10%' }}
+              className="w-full max-w-sm"
             >
               <Button
                 variant="light"
-                className="w-full max-w-sm disabled:pointer-events-none"
+                className="w-full disabled:pointer-events-none"
                 onClick={handleFormReset}
               >
                 Nova Solicitação
+                <ListPlus size={16} strokeWidth={2.5} fillOpacity={0} />
               </Button>
             </motion.div>
           )}
