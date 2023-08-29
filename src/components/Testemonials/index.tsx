@@ -76,16 +76,40 @@ export default function Testemonials() {
   }
 
   return (
-    <section id="testemonials" className="relative flex overflow-hidden">
-      <div className="flex w-full max-w-[50%] justify-end pr-32">
-        <Quote size={220} strokeWidth={2} color="transparent" fill="#ebf6f3" />
+    <section
+      id="testemonials"
+      className="
+        relative flex overflow-hidden
+        max-lg:flex-col
+      "
+    >
+      <div
+        className="
+          flex w-full max-w-[50%] justify-end pr-32
+          max-lg:mx-auto max-lg:h-48 max-lg:max-w-md
+          max-lg:justify-end max-lg:pr-0
+        "
+      >
+        <Quote
+          size={'100%'}
+          strokeWidth={2}
+          color="transparent"
+          fill="#ebf6f3"
+          className="
+            h-[220px] w-[220px] 
+            max-lg:h-[110px] max-lg:w-[110px]
+          "
+        />
       </div>
       <Image
         src={TestemonialsBgSrc}
         alt="Green squares blob image"
         quality={100}
-        className="h-[600px] w-full max-w-[50%] bg-repeat-x object-cover object-left"
         placeholder="blur"
+        className="
+          h-[600px] w-full max-w-[50%] bg-repeat-x object-cover object-left
+          max-lg:h-[240px] max-lg:max-w-full 
+        "
       />
       <Testemonial.Root>
         <Testemonial.Controller>

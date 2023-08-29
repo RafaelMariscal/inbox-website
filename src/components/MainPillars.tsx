@@ -9,7 +9,7 @@ export default function MainPillars() {
     <section id="pillars" className="mx-auto mb-14 max-w-screen-lg pt-9">
       <SectionTitle useTextDecoration>Nossos Pilares</SectionTitle>
 
-      <div className="flex gap-10">
+      <div className="flex gap-10 max-lg:mx-auto max-lg:w-fit max-lg:flex-col">
         <Card.Root>
           <Card.Image
             src={TraditionSrc}

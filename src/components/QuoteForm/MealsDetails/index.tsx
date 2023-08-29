@@ -26,6 +26,7 @@ export default function MealsDetails({
       {...props}
       className={clsx(
         'relative mb-6',
+        'max-lg:mx-auto max-lg:max-w-screen-phones',
         errors?.mealsRequest && 'border-terracotta-500',
       )}
     >
@@ -61,7 +62,7 @@ export default function MealsDetails({
               <MealsRequest.HeaderCell className="w-[5.25rem]">
                 Domingo
               </MealsRequest.HeaderCell>
-              <MealsRequest.HeaderCell className="max-w-md flex-1">
+              <MealsRequest.HeaderCell className="min-w-[6rem] max-w-md flex-1">
                 Composição
               </MealsRequest.HeaderCell>
             </MealsRequest.TableHeader>
@@ -84,7 +85,12 @@ export default function MealsDetails({
                     <MealsRequest.RowContentCell className="w-[5.25rem]">
                       {meal.sundaysQuantities}
                     </MealsRequest.RowContentCell>
-                    <MealsRequest.RowContentCell className="flex-1 truncate px-2">
+                    <MealsRequest.RowContentCell
+                      className="
+                        min-w-[6rem] flex-1 truncate px-2
+                        max-lg:max-w-[9rem]
+                      "
+                    >
                       {meal.mealDescription}
                     </MealsRequest.RowContentCell>
                   </MealsRequest.RowContent>

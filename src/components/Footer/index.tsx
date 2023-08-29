@@ -6,14 +6,21 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <footer className="w-full bg-eden-900 px-4 pb-3 pt-10">
-      <div className="mx-auto flex w-full max-w-screen-xl items-start justify-around">
-        <Link href={'/'} target="_blank" className="outline-none">
+      <div
+        className="
+          mx-auto flex w-full max-w-screen-xl items-start justify-around
+          max-lg:w-fit max-lg:flex-col max-lg:gap-10
+        "
+      >
+        <Link href={'/'} target="_blank" className="self-center outline-none">
           <Image
             src={LogoSrc}
             alt=""
-            height={120}
             quality={100}
-            className="drop-shadow-custom-img"
+            className="
+              h-[120px] w-auto drop-shadow-custom-img
+              max-lg:h-24
+            "
           />
         </Link>
         <FooterSection.Root>

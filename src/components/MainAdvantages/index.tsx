@@ -64,13 +64,13 @@ export default function MainAdvantages() {
         <strong className="font-bold">Vantagens</strong> ao Terceirizar
       </SectionTitle>
 
-      <div className="mb-6 flex items-center justify-center gap-16">
+      <div className="mb-6 flex items-center justify-center gap-16 max-lg:mb-4">
         <Image
           src={salad1}
           alt="A Salad plate that looks really healthy"
           quality={100}
           width={300}
-          className="drop-shadow-custom-img"
+          className="drop-shadow-custom-img max-lg:hidden"
         />
         <ul className="flex max-w-screen-phones flex-col gap-4 ">
           {FirsAdvanteges.map((adv, index) => (
@@ -105,7 +105,7 @@ export default function MainAdvantages() {
           alt="A Salad plate that looks really healthy"
           quality={100}
           width={300}
-          className="drop-shadow-custom-img"
+          className="drop-shadow-custom-img max-lg:hidden"
         />
       </div>
     </section>

@@ -60,7 +60,11 @@ export default function MainForm({
   return (
     <form
       {...props}
-      className={twMerge('grid grid-cols-2 gap-3 gap-x-6', props.className)}
+      className={twMerge(
+        'grid grid-cols-2 gap-3 gap-x-6',
+        'max-lg:mx-auto max-lg:max-w-screen-phones max-lg:grid-cols-1',
+        props.className,
+      )}
       onSubmit={handleSubmit(quoteFormSubmit)}
     >
       <Input.Root errorMessage={errors.name}>

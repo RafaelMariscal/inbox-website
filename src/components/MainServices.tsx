@@ -9,7 +9,7 @@ export default function MainServices() {
     <section id="services" className="mx-auto mb-14 max-w-screen-lg pt-9">
       <SectionTitle useTextDecoration>Nossos Serviços</SectionTitle>
 
-      <div className="flex gap-10">
+      <div className="flex gap-10 max-lg:mx-auto max-lg:w-fit max-lg:flex-col">
         <Card.Root tabIndex={3}>
           <Card.Image src={KitchenSrc} alt="Industrial restaurant's kitchen" />
           <Card.Content>

@@ -6,7 +6,10 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="mb-14 flex items-center justify-center gap-10 pt-14"
+      className="
+        mb-14 flex items-center justify-center gap-10 pt-14
+        max-lg:mb-0 max-lg:pb-6
+      "
     >
       <article
         className="
@@ -15,8 +18,8 @@ export default function AboutUs() {
         "
         tabIndex={15}
       >
-        <SectionTitle className="mb-0 text-start text-5xl drop-shadow-none">
-          Quem somos:
+        <SectionTitle className="mb-0 text-start text-5xl drop-shadow-none max-lg:text-center">
+          Quem somos
         </SectionTitle>
 
         <p>
@@ -55,7 +58,7 @@ export default function AboutUs() {
         src={LogoSrc}
         alt="Inbox embossed Logo"
         width={400}
-        className="opacity-70 drop-shadow-custom-logo"
+        className="opacity-70 drop-shadow-custom-logo max-lg:hidden"
       />
     </section>
   )

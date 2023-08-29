@@ -19,7 +19,10 @@ export default function TestemonialContent({
       axis="x"
       values={testemonials}
       onReorder={setTestemonials}
-      className="flex gap-3"
+      className="
+        flex gap-3
+        max-lg:translate-x-[37%]
+      "
     >
       {children}
     </Reorder.Group>
