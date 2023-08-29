@@ -7,6 +7,7 @@ import { twMerge } from 'tailwind-merge'
 type ButtonRootProps = LinkProps & {
   variant: 'light' | 'eden' | 'stroke'
   children: ReactNode
+  tabIndex?: number
   className?: string
 }
 

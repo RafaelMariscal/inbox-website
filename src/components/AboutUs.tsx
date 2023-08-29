@@ -10,8 +10,10 @@ export default function AboutUs() {
     >
       <article
         className="
-          flex max-w-screen-phones flex-col gap-4 font-bold drop-shadow-custom-text
+          flex max-w-screen-phones flex-col gap-4 font-bold outline-none
+          drop-shadow-custom-text
         "
+        tabIndex={15}
       >
         <SectionTitle className="mb-0 text-start text-5xl drop-shadow-none">
           Quem somos:

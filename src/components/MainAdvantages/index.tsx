@@ -72,9 +72,9 @@ export default function MainAdvantages() {
           width={300}
           className="drop-shadow-custom-img"
         />
-        <ul className="flex max-w-screen-phones flex-col gap-6 ">
+        <ul className="flex max-w-screen-phones flex-col gap-4 ">
           {FirsAdvanteges.map((adv, index) => (
-            <Advantage.Root key={adv.text} index={index}>
+            <Advantage.Root key={adv.text} index={index} tabIndex={6 + index}>
               <Advantage.Icon>
                 <adv.icon size={22} color="#f6e68f" strokeWidth="2" />
               </Advantage.Icon>
@@ -85,9 +85,14 @@ export default function MainAdvantages() {
       </div>
 
       <div className="flex items-center justify-center gap-16">
-        <ul className="flex max-w-screen-phones flex-col gap-6">
+        <ul className="flex max-w-screen-phones flex-col gap-4">
           {SecondAdvanteges.map((adv, index) => (
-            <Advantage.Root key={adv.text} direction={-1} index={index}>
+            <Advantage.Root
+              key={adv.text}
+              direction={-1}
+              index={index}
+              tabIndex={FirsAdvanteges.length + 6 + index}
+            >
               <Advantage.Icon>
                 <adv.icon size={22} color="#f6e68f" strokeWidth="2" />
               </Advantage.Icon>

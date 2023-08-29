@@ -38,11 +38,16 @@ export default function Hero() {
       </h2>
 
       <div className="flex w-full max-w-screen-phones-sm flex-col gap-6">
-        <CustomLink variant="light" href="#quoteForm" className="w-full">
+        <CustomLink
+          variant="light"
+          href="#quoteForm"
+          className="w-full"
+          tabIndex={1}
+        >
           Solicitar Orçamento
           <Soup size={18} strokeWidth={2} fillOpacity={0} />
         </CustomLink>
-        {/* <CustomLink variant="stroke" href="" className="w-full">
+        {/* <CustomLink variant="stroke" href="" className="w-full" tabIndex={2}>
           Whatsapp
           <WhatsappLogo className="[&_*]:fill-eden-100" />
         </CustomLink> */}

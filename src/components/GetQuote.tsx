@@ -12,7 +12,7 @@ export default function GetQuote() {
           Nossa equipe está à disposição para retirar qualquer dúvida.
         </p>
       </div>
-      <CustomLink href="#quoteForm" variant="light">
+      <CustomLink href="#quoteForm" variant="light" tabIndex={14}>
         Solicitar Orçamento
         <Soup size={18} strokeWidth={2} fillOpacity={0} />
       </CustomLink>

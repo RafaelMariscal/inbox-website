@@ -1,13 +1,12 @@
-import { ReactNode } from 'react'
+import { ComponentProps } from 'react'
 
-interface CardRootProps {
-  children: ReactNode
-}
+type CardRootProps = ComponentProps<'button'>
 
-export default function CardRoot({ children }: CardRootProps) {
+export default function CardRoot(props: CardRootProps) {
   return (
     <button
       type="button"
+      {...props}
       className="
         relative block cursor-default select-none overflow-hidden shadow-card
         outline-none
@@ -28,8 +27,6 @@ export default function CardRoot({ children }: CardRootProps) {
         [&_p]:focus:h-fit [&_p]:focus:w-full 
         [&_p]:focus:animate-[show-text_300ms_ease-in-out_forwards_150ms]
       "
-    >
-      {children}
-    </button>
+    />
   )
 }

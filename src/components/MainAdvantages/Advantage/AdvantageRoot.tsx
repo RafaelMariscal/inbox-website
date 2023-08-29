@@ -1,8 +1,7 @@
 'use client'
-import { ReactNode } from 'react'
-import { motion } from 'framer-motion'
-interface AdvantageRootProps {
-  children: ReactNode
+import { HTMLMotionProps, motion } from 'framer-motion'
+
+type AdvantageRootProps = HTMLMotionProps<'li'> & {
   direction?: -1 | 1
   index?: number
 }
@@ -11,6 +10,7 @@ export default function AdvantageRoot({
   children,
   direction = 1,
   index = 0,
+  ...props
 }: AdvantageRootProps) {
   const fadeInAnimationVariants = {
     initial: {
@@ -25,13 +25,14 @@ export default function AdvantageRoot({
   }
   return (
     <motion.li
-      className="flex gap-4"
+      className="flex gap-4 pb-2 pt-1 outline-none transition-colors focus:bg-eden-100"
       variants={fadeInAnimationVariants}
       initial="initial"
       whileInView="animate"
       viewport={{
         once: true,
       }}
+      {...props}
     >
       {children}
     </motion.li>

@@ -10,7 +10,7 @@ export default function MainServices() {
       <SectionTitle useTextDecoration>Nossos Serviços</SectionTitle>
 
       <div className="flex gap-10">
-        <Card.Root>
+        <Card.Root tabIndex={3}>
           <Card.Image src={KitchenSrc} alt="Industrial restaurant's kitchen" />
           <Card.Content>
             <Card.Title>
@@ -25,7 +25,7 @@ export default function MainServices() {
             </Card.Description>
           </Card.Content>
         </Card.Root>
-        <Card.Root>
+        <Card.Root tabIndex={4}>
           <Card.Image src={VanSrc} alt="Industrial restaurant's kitchen" />
           <Card.Content>
             <Card.Title>
@@ -39,7 +39,7 @@ export default function MainServices() {
             </Card.Description>
           </Card.Content>
         </Card.Root>
-        <Card.Root>
+        <Card.Root tabIndex={5}>
           <Card.Image src={CateringSrc} alt="Industrial restaurant's kitchen" />
           <Card.Content>
             <Card.Title>
