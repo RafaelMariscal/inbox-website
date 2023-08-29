@@ -1,5 +1,5 @@
 import { FileEdit } from 'lucide-react'
-import MealRequestDialog from '../MealRequestDialog'
+import MealRequestDialog from '../../MealRequestDialog'
 import { MealRequestedType } from '@/contexts/QuoteFormContext/porvider'
 
 type MealsRequestTableRowEditButtonProps = {

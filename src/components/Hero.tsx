@@ -2,7 +2,6 @@
 import { Bree_Serif } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
 import Brand from '@/assets/logo/Brand'
-import WhatsappLogo from '@/assets/icons/WhatsappLogo'
 import CustomLink from './CustomLink'
 import Image from 'next/image'
 import HeroBgSrc from '@/assets/images/HeroBackground.png'

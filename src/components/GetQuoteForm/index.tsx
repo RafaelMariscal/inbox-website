@@ -1,25 +1,22 @@
 'use client'
 
-import Input from './Input'
 import SectionTitle from '../SectionTitle'
-import MealRequest from './MealsRequest'
 import Button from '../Button'
-import MealRequestDialog from './MealRequestDialog'
-import clsx from 'clsx'
 import { useQuoteFormContext } from '@/contexts/QuoteFormContext/hook'
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ClipboardCheck, ListPlus, Loader2, Send, Soup } from 'lucide-react'
+import { ClipboardCheck, ListPlus, Loader2, Send } from 'lucide-react'
 import MainForm from './MainForm'
+import MealsDetails from './MealsDetails'
 
 export default function GetQuoteForm() {
   const [isLoading, setIsLoading] = useState(false)
   const quoteFormContext = useQuoteFormContext()
   if (quoteFormContext === null) return <></>
-  const { useQuoteForm, mealsRequested, setMealsRequested } = quoteFormContext
+  const { useQuoteForm, setMealsRequested } = quoteFormContext
   const {
     reset,
-    formState: { isSubmitSuccessful, errors },
+    formState: { isSubmitSuccessful },
   } = useQuoteForm
 
   const handleFormReset = () => {
@@ -48,94 +45,9 @@ export default function GetQuoteForm() {
         className="grid grid-cols-2 gap-3 gap-x-6"
         noValidate
       />
-      <MealRequest.Root
-        className={clsx(
-          'relative mb-6',
-          errors?.mealsRequest && 'border-terracotta-500',
-        )}
-      >
-        {errors?.mealsRequest && (
-          <Input.ErrorMessage errorMessage={errors?.mealsRequest.message} />
-        )}
-        <MealRequest.Title>Refeições Solicitadas:</MealRequest.Title>
-        <AnimatePresence>
-          {mealsRequested.length === 0 && (
-            <motion.div
-              initial={{ opacity: '0%', translateY: '-10%' }}
-              animate={{ opacity: '100%', translateY: '0%' }}
-              exit={{ opacity: '0%', translateY: '10%' }}
-            >
-              <MealRequest.EmptyState />
-            </motion.div>
-          )}
-          {mealsRequested.length !== 0 && (
-            <MealRequest.Table>
-              <MealRequest.TableHeader>
-                <MealRequest.HeaderCell className="w-36">
-                  Tipo de Refeição
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="w-[5.25rem]">
-                  Horário
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="w-[5.25rem]">
-                  Seg. à Sex.
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="w-[5.25rem]">
-                  Sábado
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="w-[5.25rem]">
-                  Domingo
-                </MealRequest.HeaderCell>
-                <MealRequest.HeaderCell className="max-w-md flex-1">
-                  Composição
-                </MealRequest.HeaderCell>
-              </MealRequest.TableHeader>
-              <AnimatePresence>
-                {mealsRequested.map((meal) => (
-                  <MealRequest.TableRow key={meal.id}>
-                    <MealRequest.RowContent>
-                      <MealRequest.RowContentCell className="w-36">
-                        {meal.mealType}
-                      </MealRequest.RowContentCell>
-                      <MealRequest.RowContentCell className="w-[5.25rem]">
-                        {meal.mealTime}
-                      </MealRequest.RowContentCell>
-                      <MealRequest.RowContentCell className="w-[5.25rem]">
-                        {meal.weekDaysQuantities}
-                      </MealRequest.RowContentCell>
-                      <MealRequest.RowContentCell className="w-[5.25rem]">
-                        {meal.saturdayQuantities}
-                      </MealRequest.RowContentCell>
-                      <MealRequest.RowContentCell className="w-[5.25rem]">
-                        {meal.sundaysQuantities}
-                      </MealRequest.RowContentCell>
-                      <MealRequest.RowContentCell className="flex-1 truncate px-2">
-                        {meal.mealDescription}
-                      </MealRequest.RowContentCell>
-                    </MealRequest.RowContent>
-                    <MealRequest.RowEditButton
-                      meal={meal}
-                      disabled={isLoading || isSubmitSuccessful}
-                    />
-                  </MealRequest.TableRow>
-                ))}
-              </AnimatePresence>
-            </MealRequest.Table>
-          )}
-        </AnimatePresence>
 
-        <MealRequestDialog
-          meal={null}
-          customClassName={{
-            before: 'left-1/2 mt-4 -translate-x-1/2',
-            className: 'h-9 px-4',
-          }}
-          disabled={isLoading || isSubmitSuccessful}
-        >
-          Adicionar Refeição
-          <Soup size={16} strokeWidth={2} fillOpacity={0} />
-        </MealRequestDialog>
-      </MealRequest.Root>
+      <MealsDetails isLoading={isLoading} />
+
       <div className="flex flex-col items-center justify-center gap-4">
         <Button
           type="submit"

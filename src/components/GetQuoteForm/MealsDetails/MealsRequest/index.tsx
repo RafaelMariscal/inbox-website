@@ -9,7 +9,7 @@ import MealsRequestTableRowContentCell from './MealsRequestTableRowContentCell'
 import MealsRequestTableRowEditButton from './MealsRequestTableRowEditButton'
 import MealsRequestTitle from './MealsRequestTitle'
 
-const MealRequest = {
+const MealsRequest = {
   Root: MealsRequestRoot,
   Title: MealsRequestTitle,
   EmptyState: MealsRequestEmptyState,
@@ -22,4 +22,4 @@ const MealRequest = {
   RowEditButton: MealsRequestTableRowEditButton,
 }
 
-export default MealRequest
+export default MealsRequest
