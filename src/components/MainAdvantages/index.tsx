@@ -11,8 +11,51 @@ import {
   Stethoscope,
   PiggyBank,
   Laugh,
+  LucideIcon,
 } from 'lucide-react'
 import SectionTitle from '../SectionTitle'
+
+type AdvantegesType = {
+  icon: LucideIcon
+  text: string
+}
+
+const FirsAdvanteges: AdvantegesType[] = [
+  {
+    icon: SlidersHorizontal,
+    text: 'Customização dos serviços oferecidos conforme as necessidades, atendendo 24/7.',
+  },
+  {
+    icon: BarChartHorizontalBig,
+    text: 'Otimização dos recursos do contratante, pois os esforços são direcionados a sua atividade principal.',
+  },
+  {
+    icon: FilePieChart,
+    text: 'Incentivos fiscais, através do Programa de Alimentação do Trabalhador (PAT).',
+  },
+  {
+    icon: SmilePlus,
+    text: 'Maior satisfação dos funcionários, uma vez que sentem-se valorizados pela organização.',
+  },
+]
+const SecondAdvanteges: AdvantegesType[] = [
+  {
+    icon: Soup,
+    text: 'Cardápios elaborados por Nutricionistas, entregando uma alimentação balanceada aos comensais.',
+  },
+  {
+    icon: Stethoscope,
+    text: 'Maior Segurança Alimentar, devido às boas práticas nutricionais aplicadas por nossos colaboradores.',
+  },
+  {
+    icon: PiggyBank,
+    text: 'Redução dos custos com assistência médica, relacionados à alimentação inadequada.',
+  },
+  {
+    icon: Laugh,
+    text: 'Aumento da interação entre os colaboradores através dos eventos periódicos oferecidos.',
+  },
+]
 
 export default function MainAdvantages() {
   return (
@@ -29,89 +72,29 @@ export default function MainAdvantages() {
           width={300}
           className="drop-shadow-custom-img"
         />
-        <div className="flex max-w-screen-phones flex-col gap-6 ">
-          <Advantage.Root>
-            <Advantage.Icon>
-              <SlidersHorizontal size={22} color="#f6e68f" strokeWidth="2" />
-            </Advantage.Icon>
-            <Advantage.Text>
-              Customização dos serviços oferecidos conforme as necessidades,
-              atendendo 24/7.
-            </Advantage.Text>
-          </Advantage.Root>
-          <Advantage.Root>
-            <Advantage.Icon>
-              <BarChartHorizontalBig
-                size={22}
-                color="#f6e68f"
-                strokeWidth="2"
-              />
-            </Advantage.Icon>
-            <Advantage.Text>
-              Otimização dos recursos do contratante, pois os esforços são
-              direcionados a sua atividade principal.
-            </Advantage.Text>
-          </Advantage.Root>
-          <Advantage.Root>
-            <Advantage.Icon>
-              <FilePieChart size={22} color="#f6e68f" strokeWidth="2" />
-            </Advantage.Icon>
-            <Advantage.Text>
-              Incentivos fiscais, através do Programa de Alimentação do
-              Trabalhador (PAT).
-            </Advantage.Text>
-          </Advantage.Root>
-          <Advantage.Root>
-            <Advantage.Icon>
-              <SmilePlus size={22} color="#f6e68f" strokeWidth="2" />
-            </Advantage.Icon>
-            <Advantage.Text>
-              Maior satisfação dos funcionários, uma vez que sentem-se
-              valorizados pela organização.
-            </Advantage.Text>
-          </Advantage.Root>
-        </div>
+        <ul className="flex max-w-screen-phones flex-col gap-6 ">
+          {FirsAdvanteges.map((adv, index) => (
+            <Advantage.Root key={adv.text} index={index}>
+              <Advantage.Icon>
+                <adv.icon size={22} color="#f6e68f" strokeWidth="2" />
+              </Advantage.Icon>
+              <Advantage.Text>{adv.text}</Advantage.Text>
+            </Advantage.Root>
+          ))}
+        </ul>
       </div>
 
       <div className="flex items-center justify-center gap-16">
-        <div className="flex max-w-screen-phones flex-col gap-6">
-          <Advantage.Root>
-            <Advantage.Icon>
-              <Soup size={22} color="#f6e68f" strokeWidth="2" />
-            </Advantage.Icon>
-            <Advantage.Text>
-              Cardápios elaborados por Nutricionistas, entregando uma
-              alimentação balanceada aos comensais.
-            </Advantage.Text>
-          </Advantage.Root>
-          <Advantage.Root>
-            <Advantage.Icon>
-              <Stethoscope size={22} color="#f6e68f" strokeWidth="2" />
-            </Advantage.Icon>
-            <Advantage.Text>
-              Maior Segurança Alimentar, devido às boas práticas nutricionais
-              aplicadas por nossos colaboradores.
-            </Advantage.Text>
-          </Advantage.Root>
-          <Advantage.Root>
-            <Advantage.Icon>
-              <PiggyBank size={22} color="#f6e68f" strokeWidth="2" />
-            </Advantage.Icon>
-            <Advantage.Text>
-              Redução dos custos com assistência médica, relacionados à
-              alimentação inadequada.
-            </Advantage.Text>
-          </Advantage.Root>
-          <Advantage.Root>
-            <Advantage.Icon>
-              <Laugh size={22} color="#f6e68f" strokeWidth="2" />
-            </Advantage.Icon>
-            <Advantage.Text>
-              Aumento da interação entre os colaboradores através dos eventos
-              periódicos oferecidos.
-            </Advantage.Text>
-          </Advantage.Root>
-        </div>
+        <ul className="flex max-w-screen-phones flex-col gap-6">
+          {SecondAdvanteges.map((adv, index) => (
+            <Advantage.Root key={adv.text} direction={-1} index={index}>
+              <Advantage.Icon>
+                <adv.icon size={22} color="#f6e68f" strokeWidth="2" />
+              </Advantage.Icon>
+              <Advantage.Text>{adv.text}</Advantage.Text>
+            </Advantage.Root>
+          ))}
+        </ul>
         <Image
           src={salad2}
           alt="A Salad plate that looks really healthy"
