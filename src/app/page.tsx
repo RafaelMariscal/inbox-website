@@ -1,10 +1,10 @@
 import AboutUs from '@/components/AboutUs'
 import GetQuote from '@/components/GetQuote'
-import GetQuoteForm from '@/components/GetQuoteForm'
 import Hero from '@/components/Hero'
 import MainAdvantages from '@/components/MainAdvantages'
 import MainPillars from '@/components/MainPillars'
 import MainServices from '@/components/MainServices'
+import QuoteForm from '@/components/QuoteForm'
 import Testemonials from '@/components/Testemonials'
 import { GlobalMealRequestFormProvider } from '@/contexts/MealRequestFormContext/porvider'
 import { GlobalQuoteFormProvider } from '@/contexts/QuoteFormContext/porvider'
@@ -23,7 +23,7 @@ export default function Home() {
         <Testemonials />
         <GlobalQuoteFormProvider>
           <GlobalMealRequestFormProvider>
-            <GetQuoteForm />
+            <QuoteForm />
           </GlobalMealRequestFormProvider>
         </GlobalQuoteFormProvider>
       </div>
