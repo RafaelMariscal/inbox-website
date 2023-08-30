@@ -28,23 +28,25 @@ export default function Hero() {
         priority
       />
       {/* <Brand className="drop-shadow-custom max-sm:scale-[80%]" /> */}
-      <Image
-        src={LogoSrc}
-        alt="Logotipo Inbox Alimentação e Serviços"
-        quality={100}
-        priority
-        className="drop-shadow-custom"
-      />
-      <h2
-        className={twMerge(
-          breeSerif.className,
-          'max-w-lg text-center text-5xl tracking-wider',
-          'text-light drop-shadow-custom',
-          'max-sm:max-w-sm max-sm:text-4xl',
-        )}
-      >
-        Qualidade e Sabor em Larga Escala
-      </h2>
+      <div className="relative z-30 flex flex-col items-center gap-6">
+        <Image
+          src={LogoSrc}
+          alt="Logotipo Inbox Alimentação e Serviços"
+          quality={100}
+          priority
+          className="drop-shadow-custom"
+        />
+        <h2
+          className={twMerge(
+            breeSerif.className,
+            'max-w-lg text-center text-5xl tracking-wider',
+            'text-light drop-shadow-custom',
+            'max-sm:max-w-sm max-sm:text-4xl',
+          )}
+        >
+          Qualidade e Sabor em Larga Escala
+        </h2>
+      </div>
 
       <div className="flex w-full max-w-screen-phones-sm flex-col gap-6">
         <CustomLink
