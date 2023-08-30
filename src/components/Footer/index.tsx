@@ -12,15 +12,16 @@ export default function Footer() {
           max-lg:w-fit max-lg:flex-col max-lg:gap-10
         "
       >
-        <Link href={'/'} target="_blank" className="self-center outline-none">
+        <Link
+          href={'/'}
+          target="_blank"
+          className="outline-none max-lg:self-center"
+        >
           <Image
             src={LogoSrc}
-            alt=""
+            alt="Logotipo Inbox Alimentação e Serviços"
             quality={100}
-            className="
-              h-[120px] w-auto drop-shadow-custom-img
-              max-lg:h-24
-            "
+            className="drop-shadow-custom-img"
           />
         </Link>
         <FooterSection.Root>

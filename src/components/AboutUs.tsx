@@ -57,7 +57,8 @@ export default function AboutUs() {
 
       <Image
         src={LogoSrc}
-        alt="Inbox embossed Logo"
+        alt="Logotipo Inbox Alimentação e Serviços em alto relevo"
+        quality={100}
         width={400}
         className="opacity-70 drop-shadow-custom-logo max-lg:hidden"
       />

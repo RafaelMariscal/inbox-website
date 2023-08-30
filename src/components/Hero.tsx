@@ -33,7 +33,7 @@ export default function Hero() {
         alt="Logotipo Inbox Alimentação e Serviços"
         quality={100}
         priority
-        className="h-auto w-full max-w-[460px] drop-shadow-custom max-sm:max-w-screen-phones-sm"
+        className="drop-shadow-custom"
       />
       <h2
         className={twMerge(
