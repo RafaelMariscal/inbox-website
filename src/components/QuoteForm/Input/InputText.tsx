@@ -18,7 +18,7 @@ export default function InputText<T>({
       {...rest}
       className={twMerge(
         'absolute inset-0 z-10 bg-transparent px-4 pt-2 outline-none',
-        'disabled: truncate font-semibold',
+        'truncate font-semibold max-tablets-sm:[&_~*]:text-sm',
         'disabled:opacity-60 [&_~div]:disabled:opacity-0',
         'read-only:opacity-60 [&_~div]:read-only:opacity-0',
         '[&_~*]:valid:top-[.125rem] [&_~*]:focus:top-[.125rem]',

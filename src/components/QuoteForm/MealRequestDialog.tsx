@@ -158,9 +158,8 @@ export default function MealRequestDialog({
                 <X size={18} className="p-[.125rem]" />
               </Dialog.Close>
             </header>
-            <Dialog.Description className="text-sm font-medium opacity-70">
-              Complete o formulário para adicionar uma nova refeição à
-              solicitação.
+            <Dialog.Description className="w-full text-sm font-medium opacity-70">
+              Complete o formulário para adicionar uma nova refeição.
             </Dialog.Description>
 
             <form
@@ -183,7 +182,7 @@ export default function MealRequestDialog({
                   />
                   <Input.Select
                     name="mealTime"
-                    placeholder="Horário"
+                    placeholder="Hora"
                     value={mealTimeValue}
                     setValue={setValue}
                     errorMessage={errors?.mealTime?.message}
@@ -199,7 +198,9 @@ export default function MealRequestDialog({
                       className="text-center"
                     />
                     <Input.Container>
-                      <Input.Label>Qtd. seg. à sex.</Input.Label>
+                      <Input.Label>
+                        <span className="max-phones:hidden">Qtd.</span> semana
+                      </Input.Label>
                     </Input.Container>
                     {errors?.weekDaysQuantities && (
                       <Input.ErrorMessage
@@ -215,7 +216,9 @@ export default function MealRequestDialog({
                       className="text-center"
                     />
                     <Input.Container>
-                      <Input.Label>Qtd. sábado</Input.Label>
+                      <Input.Label>
+                        <span className="max-phones:hidden">Qtd.</span> sábado
+                      </Input.Label>
                     </Input.Container>
                     {errors?.saturdayQuantities && (
                       <Input.ErrorMessage
@@ -231,7 +234,9 @@ export default function MealRequestDialog({
                       className="text-center"
                     />
                     <Input.Container>
-                      <Input.Label>Qtd. domingo</Input.Label>
+                      <Input.Label>
+                        <span className="max-phones:hidden">Qtd.</span> domingo
+                      </Input.Label>
                     </Input.Container>
                     {errors?.sundaysQuantities && (
                       <Input.ErrorMessage

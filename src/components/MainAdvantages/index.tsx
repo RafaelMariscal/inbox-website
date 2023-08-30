@@ -63,7 +63,7 @@ export default function MainAdvantages() {
       id="advantages"
       className="mx-auto mb-12 max-w-screen-lg px-4 pt-9"
     >
-      <SectionTitle className="mb-8">
+      <SectionTitle className="" useTextDecoration>
         <strong className="font-bold">Vantagens</strong> ao Terceirizar
       </SectionTitle>
 

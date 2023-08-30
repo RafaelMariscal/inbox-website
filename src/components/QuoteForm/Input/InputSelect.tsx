@@ -45,6 +45,7 @@ export default function InputSelect<T>({
             'shadow-lg shadow-dark/20 outline-none',
             'hover:bg-eden-100/30 focus:bg-eden-100/30',
             '[&_>div]:data-[disabled]:opacity-50',
+            'max-tablets-sm:text-sm',
             clsx(errorMessage && 'border-terracotta-500'),
             className,
           )}
@@ -73,6 +74,7 @@ export default function InputSelect<T>({
           className={twMerge(
             'w-full bg-light shadow-lg shadow-dark/20',
             'data-[state=open]:animate-[show_300ms_forwards]',
+            'max-tablets-sm:text-sm',
           )}
         >
           <Select.Viewport className="max-h-52 ">

@@ -33,6 +33,7 @@ export default function AdvantageRoot({
       }}
       className="
         flex gap-4 pb-2 pt-1 outline-none transition-colors focus:bg-eden-100
+        max-tablets-sm:focus:bg-transparent
       "
       {...props}
     >
