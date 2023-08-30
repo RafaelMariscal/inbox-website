@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import LogoSrc from '@/assets/logo/logo.svg'
+import LogoSrc from '@/assets/logo/logo.png'
 import SectionTitle from './SectionTitle'
 
 export default function AboutUs() {

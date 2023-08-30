@@ -5,7 +5,7 @@ import CustomLink from './CustomLink'
 import Image from 'next/image'
 import { Soup } from 'lucide-react'
 import HeroBgSrc from '@/assets/images/HeroBackground.png'
-import LogoSrc from '@/assets/logo/logo-hero.svg'
+import LogoSrc from '@/assets/logo/logo-hero.png'
 
 const breeSerif = Bree_Serif({
   weight: '400',

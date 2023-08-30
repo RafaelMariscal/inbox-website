@@ -1,6 +1,6 @@
 import FooterSection from './FooterSection'
 import Image from 'next/image'
-import LogoSrc from '@/assets/logo/logo-footer.svg'
+import LogoSrc from '@/assets/logo/logo-footer.png'
 import Link from 'next/link'
 
 export default function Footer() {
