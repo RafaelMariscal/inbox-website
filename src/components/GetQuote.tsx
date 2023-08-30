@@ -5,7 +5,7 @@ export default function GetQuote() {
   return (
     <div
       className="
-        flex items-center justify-center gap-14
+        flex items-center justify-center gap-14 px-4
         max-lg:flex-col max-lg:gap-4 max-lg:py-4
       "
     >
@@ -14,7 +14,11 @@ export default function GetQuote() {
           Faça já seu Orçamento!
         </h3>
         <p className="font-medium drop-shadow-custom-text">
-          Nossa equipe está à disposição para retirar qualquer dúvida.
+          Nossa equipe está à sua disposição{' '}
+          <span className="max-tablets-sm:hidden">
+            para retirar qualquer dúvida
+          </span>
+          .
         </p>
       </div>
       <CustomLink href="#quoteForm" variant="light" tabIndex={14}>

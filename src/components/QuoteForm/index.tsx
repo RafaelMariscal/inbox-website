@@ -24,7 +24,13 @@ export default function QuoteForm() {
     setMealsRequested([])
   }
   return (
-    <section id="quoteForm" className="mx-auto mb-14 max-w-screen-lg pt-12">
+    <section
+      id="quoteForm"
+      className="
+        mx-auto mb-14 max-w-screen-lg pt-12 
+        max-tablets-sm:px-4
+      "
+    >
       <SectionTitle useTextDecoration className="mb-8">
         Solicitar Orçamento
       </SectionTitle>
@@ -74,7 +80,8 @@ export default function QuoteForm() {
           )}
           {!isLoading && !isSubmitSuccessful && (
             <>
-              Enviar Solicitação de Orçamento
+              Enviar Solicitação{' '}
+              <span className="max-tablets-sm:hidden">de Orçamento</span>
               <Send size={16} strokeWidth={2} fillOpacity={0} />
             </>
           )}

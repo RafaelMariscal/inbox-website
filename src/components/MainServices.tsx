@@ -6,7 +6,10 @@ import SectionTitle from './SectionTitle'
 
 export default function MainServices() {
   return (
-    <section id="services" className="mx-auto mb-14 max-w-screen-lg pt-9">
+    <section
+      id="services"
+      className="mx-auto mb-14 max-w-screen-lg pt-9 max-lg:mb-10"
+    >
       <SectionTitle useTextDecoration>Nossos Serviços</SectionTitle>
 
       <div className="flex gap-10 max-lg:mx-auto max-lg:w-fit max-lg:flex-col">

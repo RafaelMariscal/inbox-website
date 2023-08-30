@@ -22,7 +22,10 @@ export default function TestemonialCardRoot({
         duration: 0.7,
         restSpeed: 0.2,
       }}
-      className="flex w-[440px] select-none flex-col bg-light p-8 shadow-card"
+      className="
+        flex w-[440px] select-none flex-col bg-light p-8 shadow-card
+        max-tablets-sm:w-screen max-tablets-sm:px-4
+      "
     >
       {children}
     </Reorder.Item>

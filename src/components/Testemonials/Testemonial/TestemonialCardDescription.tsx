@@ -7,5 +7,7 @@ interface TestemonialCardDescriptionProps {
 export default function TestemonialCardDescription({
   children,
 }: TestemonialCardDescriptionProps) {
-  return <span className="block font-semibold opacity-60">{children}</span>
+  return (
+    <span className="block h-fit font-semibold opacity-60">{children}</span>
+  )
 }

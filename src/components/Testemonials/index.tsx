@@ -86,8 +86,8 @@ export default function Testemonials() {
       <div
         className="
           flex w-full max-w-[50%] justify-end pr-32
-          max-lg:mx-auto max-lg:h-48 max-lg:max-w-md
-          max-lg:justify-end max-lg:pr-0
+          max-lg:mx-auto max-lg:h-60 max-lg:max-w-md
+          max-lg:justify-end max-lg:overflow-hidden max-lg:pr-0
         "
       >
         <Quote
@@ -112,7 +112,7 @@ export default function Testemonials() {
         "
       />
       <Testemonial.Root>
-        <Testemonial.Controller>
+        <Testemonial.Controller className="max-tablets:px-4">
           <Testemonial.ControllerTitle>
             Depoimentos dos clientes
           </Testemonial.ControllerTitle>

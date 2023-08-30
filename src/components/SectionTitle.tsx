@@ -16,6 +16,7 @@ export default function SectionTitle({
       data-decoration={useTextDecoration}
       className={twMerge(
         'mb-12 text-center text-5xl font-semibold leading-none drop-shadow-custom-text',
+        'max-lg:text-4xl',
         'data-[decoration=true]:relative data-[decoration=true]:after:absolute',
         'data-[decoration=true]:after:h-[.1875rem] data-[decoration=true]:after:w-36',
         'data-[decoration=true]:after:-bottom-7 data-[decoration=true]:after:bg-eden-700',

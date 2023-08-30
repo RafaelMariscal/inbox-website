@@ -4,8 +4,9 @@ import { twMerge } from 'tailwind-merge'
 import Brand from '@/assets/logo/Brand'
 import CustomLink from './CustomLink'
 import Image from 'next/image'
-import HeroBgSrc from '@/assets/images/HeroBackground.png'
 import { Soup } from 'lucide-react'
+import HeroBgSrc from '@/assets/images/HeroBackground.png'
+import LogoSrc from '@/assets/logo/logo-hero.svg'
 
 const breeSerif = Bree_Serif({
   weight: '400',
@@ -17,7 +18,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex h-[90vh] min-h-[600px] flex-col items-center justify-center gap-12"
+      className="relative flex h-[90vh] min-h-[600px] flex-col items-center justify-center gap-12 px-4"
     >
       <Image
         src={HeroBgSrc}
@@ -27,11 +28,20 @@ export default function Hero() {
         placeholder="blur"
         priority
       />
-      <Brand className="drop-shadow-custom" />
+      {/* <Brand className="drop-shadow-custom max-sm:scale-[80%]" /> */}
+      <Image
+        src={LogoSrc}
+        alt="Logotipo Inbox Alimentação e Serviços"
+        quality={100}
+        priority
+        className="z-50 h-auto w-full max-w-[460px] drop-shadow-custom max-sm:max-w-screen-phones-sm"
+      />
       <h2
         className={twMerge(
           breeSerif.className,
-          'max-w-lg text-center text-5xl tracking-wider text-light drop-shadow-custom',
+          'max-w-lg text-center text-5xl tracking-wider',
+          'text-light drop-shadow-custom',
+          'max-sm:max-w-sm max-sm:text-4xl',
         )}
       >
         Qualidade e Sabor em Larga Escala

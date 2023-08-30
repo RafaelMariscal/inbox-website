@@ -25,13 +25,15 @@ export default function AdvantageRoot({
   }
   return (
     <motion.li
-      className="flex gap-4 pb-2 pt-1 outline-none transition-colors focus:bg-eden-100"
       variants={fadeInAnimationVariants}
       initial="initial"
       whileInView="animate"
       viewport={{
         once: true,
       }}
+      className="
+        flex gap-4 pb-2 pt-1 outline-none transition-colors focus:bg-eden-100
+      "
       {...props}
     >
       {children}

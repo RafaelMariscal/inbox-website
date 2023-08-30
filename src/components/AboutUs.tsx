@@ -8,7 +8,8 @@ export default function AboutUs() {
       id="about"
       className="
         mb-14 flex items-center justify-center gap-10 pt-14
-        max-lg:mb-0 max-lg:pb-6
+        max-lg:mb-0 max-lg:px-4 max-lg:pb-6 max-lg:text-center
+        max-phones:text-start
       "
     >
       <article

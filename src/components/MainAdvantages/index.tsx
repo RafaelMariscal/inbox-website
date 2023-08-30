@@ -59,7 +59,10 @@ const SecondAdvanteges: AdvantegesType[] = [
 
 export default function MainAdvantages() {
   return (
-    <section id="advantages" className="mx-auto mb-12 max-w-screen-lg pt-9">
+    <section
+      id="advantages"
+      className="mx-auto mb-12 max-w-screen-lg px-4 pt-9"
+    >
       <SectionTitle className="mb-8">
         <strong className="font-bold">Vantagens</strong> ao Terceirizar
       </SectionTitle>
