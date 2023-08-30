@@ -1,7 +1,6 @@
 // eslint-disable-next-line camelcase
 import { Bree_Serif } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
-import Brand from '@/assets/logo/Brand'
 import CustomLink from './CustomLink'
 import Image from 'next/image'
 import { Soup } from 'lucide-react'
@@ -24,7 +23,7 @@ export default function Hero() {
         src={HeroBgSrc}
         alt="Restaurant Image"
         quality={100}
-        className="absolute h-[90vh] min-h-[600px] w-full object-cover"
+        className="absolute -z-10 h-[90vh] min-h-[600px] w-full object-cover"
         placeholder="blur"
         priority
       />
@@ -34,7 +33,7 @@ export default function Hero() {
         alt="Logotipo Inbox Alimentação e Serviços"
         quality={100}
         priority
-        className="z-50 h-auto w-full max-w-[460px] drop-shadow-custom max-sm:max-w-screen-phones-sm"
+        className="h-auto w-full max-w-[460px] drop-shadow-custom max-sm:max-w-screen-phones-sm"
       />
       <h2
         className={twMerge(
